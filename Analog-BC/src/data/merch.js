@@ -1,0 +1,173 @@
+const merch = [
+  // Ember & Oak
+  {
+    id: "ember-oak-tote",
+    businessId: "ember-oak",
+    name: "Ember & Oak Canvas Tote",
+    description: "Hand-printed canvas tote with seasonal botanical design",
+    image: "https://picsum.photos/seed/merch-tote/300/300",
+    pointCost: 250,
+  },
+  {
+    id: "ember-oak-apron",
+    businessId: "ember-oak",
+    name: "Chef's Linen Apron",
+    description: "Japanese selvedge linen apron with leather cross-back straps",
+    image: "https://picsum.photos/seed/merch-apron/300/300",
+    pointCost: 480,
+  },
+  {
+    id: "ember-oak-napkins",
+    businessId: "ember-oak",
+    name: "Linen Napkin Set",
+    description: "Set of four hand-dyed linen napkins in seasonal earth tones",
+    image: "https://picsum.photos/seed/merch-napkins/300/300",
+    pointCost: 320,
+  },
+  {
+    id: "ember-oak-board",
+    businessId: "ember-oak",
+    name: "Olive Wood Serving Board",
+    description: "Hand-carved olive wood board from our partner grove in Puglia",
+    image: "https://picsum.photos/seed/merch-board/300/300",
+    pointCost: 550,
+  },
+
+  // The Copper Still
+  {
+    id: "copper-still-kit",
+    businessId: "the-copper-still",
+    name: "Home Cocktail Kit",
+    description: "Jigger, mixing spoon, strainer, and recipe cards for 6 signature cocktails",
+    image: "https://picsum.photos/seed/merch-cocktail-kit/300/300",
+    pointCost: 400,
+  },
+  {
+    id: "copper-still-coasters",
+    businessId: "the-copper-still",
+    name: "Leather Coaster Set",
+    description: "Set of four hand-stamped leather coasters with copper rivet detail",
+    image: "https://picsum.photos/seed/merch-coasters/300/300",
+    pointCost: 200,
+  },
+  {
+    id: "copper-still-bitters",
+    businessId: "the-copper-still",
+    name: "House Bitters Collection",
+    description: "Three house-made bitters: smoked cherry, citrus cardamom, and aromatic",
+    image: "https://picsum.photos/seed/merch-bitters/300/300",
+    pointCost: 350,
+  },
+  {
+    id: "copper-still-glass",
+    businessId: "the-copper-still",
+    name: "Etched Crystal Rocks Glass",
+    description: "Hand-etched crystal glass with The Copper Still monogram",
+    image: "https://picsum.photos/seed/merch-glass/300/300",
+    pointCost: 280,
+  },
+
+  // Morning Ritual
+  {
+    id: "morning-ritual-mug",
+    businessId: "morning-ritual",
+    name: "Ceramic Pour-Over Mug",
+    description: "Handmade stoneware mug in warm speckled glaze, 12oz",
+    image: "https://picsum.photos/seed/merch-mug/300/300",
+    pointCost: 180,
+  },
+  {
+    id: "morning-ritual-blend",
+    businessId: "morning-ritual",
+    name: "Signature Blend Bag",
+    description: "250g bag of our house blend — notes of chocolate, dried fig, and toasted walnut",
+    image: "https://picsum.photos/seed/merch-coffee-bag/300/300",
+    pointCost: 150,
+  },
+  {
+    id: "morning-ritual-dripper",
+    businessId: "morning-ritual",
+    name: "Ceramic V60 Dripper",
+    description: "Custom-glazed ceramic dripper in Morning Ritual sand tone",
+    image: "https://picsum.photos/seed/merch-dripper/300/300",
+    pointCost: 300,
+  },
+  {
+    id: "morning-ritual-tote",
+    businessId: "morning-ritual",
+    name: "Morning Ritual Tote",
+    description: "Organic cotton tote with minimalist coffee plant illustration",
+    image: "https://picsum.photos/seed/merch-coffee-tote/300/300",
+    pointCost: 120,
+  },
+
+  // Hearth & Honey
+  {
+    id: "hearth-honey-jar",
+    businessId: "hearth-honey",
+    name: "Rooftop Honey Jar",
+    description: "8oz jar of raw honey harvested from our rooftop hives",
+    image: "https://picsum.photos/seed/merch-honey/300/300",
+    pointCost: 160,
+  },
+  {
+    id: "hearth-honey-starter",
+    businessId: "hearth-honey",
+    name: "Sourdough Starter Kit",
+    description: "Live sourdough starter with feeding guide and a linen banneton",
+    image: "https://picsum.photos/seed/merch-starter/300/300",
+    pointCost: 220,
+  },
+  {
+    id: "hearth-honey-loaf-sub",
+    businessId: "hearth-honey",
+    name: "Weekly Loaf Voucher",
+    description: "Four-week voucher for one fresh loaf of your choice each week",
+    image: "https://picsum.photos/seed/merch-bread/300/300",
+    pointCost: 380,
+  },
+  {
+    id: "hearth-honey-cutter",
+    businessId: "hearth-honey",
+    name: "Brass Dough Scraper",
+    description: "Solid brass bench scraper with walnut handle",
+    image: "https://picsum.photos/seed/merch-scraper/300/300",
+    pointCost: 200,
+  },
+
+  // Terroir
+  {
+    id: "terroir-tasting",
+    businessId: "terroir",
+    name: "Tasting Flight Voucher",
+    description: "Voucher for a curated three-glass tasting flight with sommelier notes",
+    image: "https://picsum.photos/seed/merch-wine-flight/300/300",
+    pointCost: 250,
+  },
+  {
+    id: "terroir-opener",
+    businessId: "terroir",
+    name: "Sommelier's Corkscrew",
+    description: "Double-hinged waiter's corkscrew in brushed copper finish",
+    image: "https://picsum.photos/seed/merch-corkscrew/300/300",
+    pointCost: 180,
+  },
+  {
+    id: "terroir-journal",
+    businessId: "terroir",
+    name: "Wine Tasting Journal",
+    description: "Linen-bound journal with guided tasting note pages and aroma wheel",
+    image: "https://picsum.photos/seed/merch-journal/300/300",
+    pointCost: 140,
+  },
+  {
+    id: "terroir-stopper",
+    businessId: "terroir",
+    name: "Ceramic Wine Stopper",
+    description: "Handmade ceramic bottle stopper with Terroir glaze pattern",
+    image: "https://picsum.photos/seed/merch-stopper/300/300",
+    pointCost: 100,
+  },
+];
+
+export default merch;
