@@ -75,7 +75,7 @@ export default function LoginScreen() {
                 fontSize: '48px',
                 fontWeight: 400,
                 color: '#FAF7F2',
-                letterSpacing: '4px',
+                letterSpacing: '2px',
                 margin: 0,
                 lineHeight: 1.1,
               }}
