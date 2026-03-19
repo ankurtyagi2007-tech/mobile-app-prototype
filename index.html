@@ -1,14 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>analog-bc</title>
-    <script type="module" crossorigin src="./assets/index-_sSszcOq.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CRfFl7zi.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog — Version Selector</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #FAF8F5;
+      color: #2C1810;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 400px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      color: #2C1810;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #A69B8D;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+    .versions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    a {
+      display: block;
+      padding: 20px 24px;
+      border: 0.5px solid #D4D1CA;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #2C1810;
+      transition: all 0.2s ease;
+      background: white;
+    }
+    a:hover {
+      border-color: #8B6914;
+      box-shadow: 0 2px 12px rgba(139, 105, 20, 0.08);
+    }
+    .version-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .version-desc {
+      font-size: 12px;
+      color: #A69B8D;
+    }
+    .current {
+      border-color: #8B6914;
+      position: relative;
+    }
+    .badge {
+      position: absolute;
+      top: -8px;
+      right: 16px;
+      background: #8B6914;
+      color: #FAF8F5;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Analog</h1>
+    <p class="subtitle">Mobile Prototype</p>
+    <div class="versions">
+      <a href="./v2/" class="current">
+        <span class="badge">Current</span>
+        <div class="version-label">Version 2 — Series A</div>
+        <div class="version-desc">Editorial typography, brass palette, cinematic imagery</div>
+      </a>
+      <a href="./v1/">
+        <div class="version-label">Version 1</div>
+        <div class="version-desc">Original design with SF venues and Unsplash imagery</div>
+      </a>
+    </div>
+  </div>
+</body>
 </html>
