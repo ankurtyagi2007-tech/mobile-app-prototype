@@ -14,8 +14,8 @@ const rotateKeyframes = `
   to { transform: rotate(360deg); }
 }
 @keyframes qr-pulse {
-  0%, 100% { box-shadow: 0 0 24px rgba(196,113,59,0.1); }
-  50% { box-shadow: 0 0 48px rgba(196,113,59,0.2); }
+  0%, 100% { box-shadow: 0 0 24px rgba(139,105,20,0.1); }
+  50% { box-shadow: 0 0 48px rgba(139,105,20,0.22); }
 }
 @keyframes qr-shimmer {
   0% { transform: translateX(-100%); }
@@ -36,15 +36,17 @@ export default function RedeemScreen() {
   if (!item || !business) {
     return (
       <PageTransition>
-        <div style={{
-          minHeight: '100dvh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: 'var(--font-heading)',
-          fontSize: 24,
-          color: 'var(--color-text)',
-        }}>
+        <div
+          style={{
+            minHeight: '100dvh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'var(--font-heading)',
+            fontSize: 24,
+            color: 'var(--color-text)',
+          }}
+        >
           Item not found
         </div>
       </PageTransition>
@@ -76,20 +78,54 @@ export default function RedeemScreen() {
             transition={{ duration: 0.3 }}
             style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)' }}
           >
-            {/* Back button — refined */}
+            {/* Product image — full-bleed, 340px, no border-radius */}
+            <div
+              className="grain"
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '340px',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="img-mood"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+              {/* Bottom gradient on image */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '120px',
+                  background: 'linear-gradient(to top, var(--color-bg) 0%, rgba(250,248,245,0) 100%)',
+                }}
+              />
+            </div>
+
+            {/* Back button — frosted glass circle, positioned over image */}
             <button
               onClick={() => navigate(-1)}
               style={{
                 position: 'absolute',
-                top: 52,
-                left: 16,
-                background: 'rgba(250,247,242,0.15)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '0.5px solid rgba(250,247,242,0.2)',
-                borderRadius: 100,
-                width: 38,
-                height: 38,
+                top: '52px',
+                left: '16px',
+                background: 'rgba(250,248,245,0.15)',
+                backdropFilter: 'blur(16px) saturate(1.4)',
+                WebkitBackdropFilter: 'blur(16px) saturate(1.4)',
+                border: '0.5px solid rgba(250,248,245,0.25)',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -97,112 +133,121 @@ export default function RedeemScreen() {
                 zIndex: 10,
               }}
             >
-              <ChevronLeft size={20} color="#FAF7F2" strokeWidth={1.5} />
+              <ChevronLeft size={20} color="#FAF8F5" strokeWidth={1.5} />
             </button>
 
-            {/* Image */}
-            <img
-              src={item.image}
-              alt={item.name}
-              style={{
-                width: '100%',
-                height: 320,
-                objectFit: 'cover',
-                display: 'block',
-                borderRadius: '0 0 24px 24px',
-              }}
-            />
-
-            {/* Details — editorial */}
-            <div style={{ padding: '28px 20px 120px' }}>
-              <h1 style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 28,
-                fontWeight: 500,
-                color: 'var(--color-text)',
-                margin: 0,
-                lineHeight: 1.2,
-                letterSpacing: '0.3px',
-              }}>
+            {/* Details */}
+            <div style={{ padding: '20px 20px 120px' }}>
+              {/* Product name — 28px Cormorant */}
+              <h1
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '28px',
+                  fontWeight: 500,
+                  color: 'var(--color-text)',
+                  margin: 0,
+                  lineHeight: 1.2,
+                  letterSpacing: '0.3px',
+                }}
+              >
                 {item.name}
               </h1>
-              <p style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 13,
-                color: 'var(--color-muted)',
-                margin: '8px 0 0',
-                fontWeight: 300,
-              }}>
+
+              {/* Venue name — 13px Plus Jakarta Sans, muted */}
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '13px',
+                  color: 'var(--color-muted)',
+                  margin: '6px 0 0',
+                  fontWeight: 300,
+                }}
+              >
                 {business.name}
               </p>
 
-              <p style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 15,
-                color: 'var(--color-text)',
-                lineHeight: 1.7,
-                margin: '24px 0 0',
-                fontWeight: 300,
-              }}>
+              {/* Description — 14px, line-height 1.7 */}
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '14px',
+                  color: 'var(--color-text)',
+                  lineHeight: 1.7,
+                  margin: '24px 0 0',
+                  fontWeight: 300,
+                }}
+              >
                 {item.description}
               </p>
 
               {/* Divider */}
-              <div style={{ height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)', margin: '28px 0' }} />
+              <div style={{ height: '0.5px', backgroundColor: 'var(--color-divider)', margin: '28px 0' }} />
 
-              {/* Points — editorial treatment */}
-              <p style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 38,
-                fontWeight: 500,
-                color: 'var(--color-accent)',
-                margin: 0,
-                lineHeight: 1,
-                letterSpacing: '0.5px',
-              }}>
+              {/* Point cost — 40px Cormorant, #8B6914 */}
+              <p
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '40px',
+                  fontWeight: 500,
+                  color: '#8B6914',
+                  margin: 0,
+                  lineHeight: 1,
+                  letterSpacing: '0.5px',
+                }}
+              >
                 {item.pointCost} points
               </p>
-              <p style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 14,
-                color: 'var(--color-muted)',
-                margin: '10px 0 0',
-                fontWeight: 300,
-              }}>
-                You have <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{userPoints}</span> points at {business.name}
+
+              {/* "You have X points" — 13px */}
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '13px',
+                  color: 'var(--color-muted)',
+                  margin: '10px 0 0',
+                  fontWeight: 300,
+                }}
+              >
+                You have{' '}
+                <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{userPoints}</span>{' '}
+                points at {business.name}
               </p>
             </div>
 
-            {/* Redeem Button — refined glass bar */}
-            <div style={{
-              position: 'fixed',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: '12px 20px',
-              paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
-              background: 'rgba(250,247,242,0.92)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              borderTop: '0.5px solid rgba(44,24,16,0.06)',
-              zIndex: 40,
-            }}>
+            {/* Redeem button — fixed bottom bar */}
+            <div
+              style={{
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: '12px 20px',
+                paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+                background: 'rgba(250,248,245,0.92)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderTop: '0.5px solid var(--color-divider)',
+                zIndex: 40,
+              }}
+            >
+              {/* Redeem button — #8B6914, rounded-full, full-width */}
               <button
                 onClick={handleRedeem}
                 disabled={!canAfford}
                 style={{
                   width: '100%',
                   padding: '16px 0',
-                  backgroundColor: canAfford ? 'var(--color-accent)' : 'var(--color-divider)',
-                  color: canAfford ? '#FAF7F2' : 'var(--color-muted)',
+                  backgroundColor: canAfford ? '#8B6914' : 'rgba(44,24,16,0.06)',
+                  color: canAfford ? '#FAF8F5' : 'var(--color-muted)',
                   fontFamily: 'var(--font-body)',
-                  fontSize: 15,
+                  fontSize: '15px',
                   fontWeight: 500,
                   border: 'none',
-                  borderRadius: 14,
+                  borderRadius: '100px',
                   cursor: canAfford ? 'pointer' : 'default',
-                  boxShadow: canAfford ? '0 2px 12px rgba(196,113,59,0.2)' : 'none',
+                  boxShadow: canAfford ? '0 2px 16px rgba(139,105,20,0.25)' : 'none',
                   letterSpacing: '0.3px',
+                  transition: 'background-color 0.2s ease',
                 }}
               >
                 {canAfford ? 'Redeem' : 'Not enough points'}
@@ -210,6 +255,7 @@ export default function RedeemScreen() {
             </div>
           </motion.div>
         ) : (
+          /* QR Code state — centered, generous whitespace */
           <motion.div
             key="post-redeem"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -222,64 +268,75 @@ export default function RedeemScreen() {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '40px 20px',
+              padding: '48px 20px',
             }}
           >
-            <h2 style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 32,
-              fontWeight: 500,
-              color: 'var(--color-text)',
-              margin: 0,
-              textAlign: 'center',
-              letterSpacing: '0.5px',
-            }}>
+            {/* "Show to Staff" — 28px Cormorant */}
+            <h2
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '28px',
+                fontWeight: 500,
+                color: 'var(--color-text)',
+                margin: 0,
+                textAlign: 'center',
+                letterSpacing: '0.5px',
+              }}
+            >
               Show to Staff
             </h2>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 14,
-              color: 'var(--color-muted)',
-              margin: '8px 0 0',
-              textAlign: 'center',
-              fontWeight: 300,
-            }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '14px',
+                color: 'var(--color-muted)',
+                margin: '10px 0 0',
+                textAlign: 'center',
+                fontWeight: 300,
+              }}
+            >
               {business.name}
             </p>
 
-            {/* QR Container with animated border — refined palette */}
-            <div style={{
-              position: 'relative',
-              marginTop: 44,
-              width: 240,
-              height: 240,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              animation: 'qr-pulse 2.5s ease-in-out infinite',
-              borderRadius: 24,
-            }}>
-              {/* Rotating gradient border — palette-matched */}
-              <div style={{
-                position: 'absolute',
-                inset: -3,
-                borderRadius: 24,
-                background: 'conic-gradient(from 0deg, #C4713B, #8B9D77, #FAF7F2, #C4713B)',
-                animation: 'qr-rotate 3s linear infinite',
-              }} />
-
-              {/* Inner background */}
-              <div style={{
+            {/* QR container with animated brass border */}
+            <div
+              style={{
                 position: 'relative',
-                width: '100%',
-                height: '100%',
-                borderRadius: 21,
-                backgroundColor: '#FFFFFF',
+                marginTop: '48px',
+                width: '240px',
+                height: '240px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
+                animation: 'qr-pulse 2.5s ease-in-out infinite',
+                borderRadius: '24px',
+              }}
+            >
+              {/* Rotating gradient border — brass palette */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: -3,
+                  borderRadius: '26px',
+                  background: 'conic-gradient(from 0deg, #8B6914, #C4B87A, #FAF8F5, #8B6914)',
+                  animation: 'qr-rotate 3s linear infinite',
+                }}
+              />
+
+              {/* Inner white background */}
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '22px',
+                  backgroundColor: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                }}
+              >
                 <QRCodeSVG
                   value={qrValue}
                   size={200}
@@ -288,62 +345,70 @@ export default function RedeemScreen() {
                   level="M"
                 />
                 {/* Shimmer overlay */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  overflow: 'hidden',
-                  pointerEvents: 'none',
-                  borderRadius: 21,
-                }}>
-                  <div style={{
+                <div
+                  style={{
                     position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(105deg, transparent 40%, rgba(196,113,59,0.06) 50%, transparent 60%)',
-                    animation: 'qr-shimmer 2s ease-in-out infinite',
-                  }} />
+                    inset: 0,
+                    overflow: 'hidden',
+                    pointerEvents: 'none',
+                    borderRadius: '22px',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(105deg, transparent 40%, rgba(139,105,20,0.07) 50%, transparent 60%)',
+                      animation: 'qr-shimmer 2s ease-in-out infinite',
+                    }}
+                  />
                 </div>
               </div>
             </div>
 
             {/* Item name */}
-            <p style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 22,
-              fontWeight: 500,
-              color: 'var(--color-text)',
-              margin: '32px 0 0',
-              textAlign: 'center',
-              letterSpacing: '0.3px',
-            }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '22px',
+                fontWeight: 500,
+                color: 'var(--color-text)',
+                margin: '36px 0 0',
+                textAlign: 'center',
+                letterSpacing: '0.3px',
+              }}
+            >
               {item.name}
             </p>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 14,
-              color: 'var(--color-muted)',
-              margin: '8px 0 0',
-              textAlign: 'center',
-              fontWeight: 300,
-            }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '14px',
+                color: 'var(--color-muted)',
+                margin: '8px 0 0',
+                textAlign: 'center',
+                fontWeight: 300,
+              }}
+            >
               Present this to your barista
             </p>
 
-            {/* Done button — refined */}
+            {/* Done button */}
             <button
               onClick={() => navigate(-1)}
               style={{
-                marginTop: 44,
+                marginTop: '48px',
                 padding: '14px 48px',
                 backgroundColor: 'transparent',
                 color: 'var(--color-text)',
                 fontFamily: 'var(--font-body)',
-                fontSize: 14,
+                fontSize: '14px',
                 fontWeight: 500,
                 border: '0.5px solid rgba(44,24,16,0.15)',
-                borderRadius: 14,
+                borderRadius: '100px',
                 cursor: 'pointer',
                 letterSpacing: '0.3px',
               }}

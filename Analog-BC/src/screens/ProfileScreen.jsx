@@ -38,47 +38,34 @@ export default function ProfileScreen() {
 
   return (
     <PageTransition>
-      <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: '40px' }}>
-        {/* Top bar */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '16px 20px',
-          }}
-        >
-          <h1
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: '24px',
-              fontWeight: 500,
-              color: 'var(--color-text)',
-              margin: 0,
-              letterSpacing: '0.5px',
-            }}
-          >
-            Profile
-          </h1>
+      <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: 48 }}>
+
+        {/* Top bar — close button top-right, subtle */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          padding: '56px 20px 0',
+        }}>
           <button
             onClick={() => navigate(-1)}
             style={{
-              width: '34px',
-              height: '34px',
+              width: 34,
+              height: 34,
               borderRadius: '50%',
-              backgroundColor: 'rgba(243,237,229,0.6)',
-              border: 'none',
+              backgroundColor: 'rgba(245,240,235,0.7)',
+              border: '0.5px solid rgba(44,24,16,0.08)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <X size={16} color="var(--color-text)" strokeWidth={1.5} />
+            <X size={15} color="var(--color-text)" strokeWidth={1.5} />
           </button>
         </div>
 
-        {/* User section — editorial, larger avatar */}
+        {/* Avatar + Name — center aligned, generous vertical spacing */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,62 +74,61 @@ export default function ProfileScreen() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '20px 20px 32px',
+            padding: '28px 20px 40px',
           }}
         >
-          <div
-            style={{
-              width: '96px',
-              height: '96px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              border: '1.5px solid rgba(44,24,16,0.1)',
-              marginBottom: '16px',
-            }}
-          >
+          {/* Avatar — 80px */}
+          <div style={{
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
+            overflow: 'hidden',
+            border: '1.5px solid rgba(44,24,16,0.1)',
+            marginBottom: 18,
+          }}>
             <img
               src={currentUser.avatar}
               alt={currentUser.name}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <h2
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: '32px',
-              fontWeight: 500,
-              color: 'var(--color-text)',
-              margin: '0 0 5px',
-              letterSpacing: '0.5px',
-            }}
-          >
+
+          {/* Name — 28px Cormorant, centered */}
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 28,
+            fontWeight: 500,
+            color: 'var(--color-text)',
+            margin: '0 0 6px',
+            letterSpacing: '0.4px',
+            textAlign: 'center',
+          }}>
             {currentUser.name}
           </h2>
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '13px',
-              color: 'var(--color-muted)',
-              margin: 0,
-              fontWeight: 300,
-              letterSpacing: '0.3px',
-            }}
-          >
+
+          {/* Member since — 13px Plus Jakarta Sans, muted, centered */}
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 13,
+            color: 'var(--color-muted)',
+            margin: 0,
+            fontWeight: 300,
+            letterSpacing: '0.3px',
+            textAlign: 'center',
+          }}>
             Member since {memberSinceText}
           </p>
         </motion.div>
 
-        {/* Overall stats — more visual weight on numbers */}
-        <div style={{ padding: '0 20px 28px' }}>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1px',
-              backgroundColor: 'rgba(44,24,16,0.04)',
-              borderRadius: '16px',
-              overflow: 'hidden',
-            }}
-          >
+        {/* Stats row — three columns, centered, stat numbers 28px Cormorant */}
+        <div style={{ padding: '0 20px 40px' }}>
+          <div style={{
+            display: 'flex',
+            gap: '1px',
+            backgroundColor: 'rgba(44,24,16,0.04)',
+            borderRadius: 14,
+            overflow: 'hidden',
+          }}>
             {[
               { value: totalVisits, label: 'Total Visits' },
               { value: totalPoints.toLocaleString(), label: 'Total Points' },
@@ -156,33 +142,31 @@ export default function ProfileScreen() {
                 style={{
                   flex: 1,
                   textAlign: 'center',
-                  padding: '20px 8px',
+                  padding: '22px 8px',
                   backgroundColor: 'var(--color-surface)',
                 }}
               >
-                <p
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '26px',
-                    fontWeight: 500,
-                    color: 'var(--color-text)',
-                    margin: '0 0 4px',
-                    lineHeight: 1,
-                  }}
-                >
+                {/* Stat number — 28px Cormorant */}
+                <p style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 28,
+                  fontWeight: 500,
+                  color: 'var(--color-text)',
+                  margin: '0 0 5px',
+                  lineHeight: 1,
+                }}>
                   {stat.value}
                 </p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '10px',
-                    color: 'var(--color-muted)',
-                    margin: 0,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1.5px',
-                    fontWeight: 300,
-                  }}
-                >
+                {/* Stat label — 10px uppercase Plus Jakarta Sans */}
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 10,
+                  color: 'var(--color-muted)',
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1.5px',
+                  fontWeight: 300,
+                }}>
                   {stat.label}
                 </p>
               </motion.div>
@@ -190,21 +174,22 @@ export default function ProfileScreen() {
           </div>
         </div>
 
-        {/* Your Places — use thumbnailImage */}
-        <div style={{ padding: '0 20px 28px' }}>
-          <h3
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: '24px',
-              fontWeight: 500,
-              color: 'var(--color-text)',
-              margin: '0 0 16px',
-              letterSpacing: '0.5px',
-            }}
-          >
+        {/* Divider */}
+        <div style={{ margin: '0 20px', height: '0.5px', backgroundColor: 'var(--color-divider)' }} />
+
+        {/* Your Places — 22px Cormorant title */}
+        <div style={{ padding: '32px 20px 0' }}>
+          <h3 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 22,
+            fontWeight: 500,
+            color: 'var(--color-text)',
+            margin: '0 0 16px',
+            letterSpacing: '0.4px',
+          }}>
             Your Places
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {enrolledBusinesses.map((business, index) => {
               const enrollment = currentUser.enrollments[business.id];
               return (
@@ -217,23 +202,23 @@ export default function ProfileScreen() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '14px',
-                    padding: '16px',
+                    gap: 14,
+                    padding: 16,
                     backgroundColor: 'var(--color-surface)',
-                    borderRadius: '16px',
-                    boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
+                    border: '0.5px solid rgba(44,24,16,0.06)',
+                    borderRadius: 12,
+                    boxShadow: 'var(--shadow-card)',
                     cursor: 'pointer',
                   }}
                 >
-                  <div
-                    style={{
-                      width: '48px',
-                      height: '48px',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                      flexShrink: 0,
-                    }}
-                  >
+                  {/* Thumbnail — 48px */}
+                  <div style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                  }}>
                     <img
                       src={business.thumbnailImage}
                       alt={business.name}
@@ -241,33 +226,44 @@ export default function ProfileScreen() {
                     />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 3px' }}>
+                    <p style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: 16,
+                      fontWeight: 500,
+                      color: 'var(--color-text)',
+                      margin: '0 0 3px',
+                    }}>
                       {business.name}
                     </p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: 0, fontWeight: 300 }}>
+                    <p style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 12,
+                      color: 'var(--color-muted)',
+                      margin: 0,
+                      fontWeight: 300,
+                    }}>
                       {enrollment.currentTier} &middot; {enrollment.visits} visits
                     </p>
                   </div>
-                  <ChevronRight size={16} color="var(--color-divider)" strokeWidth={1.5} />
+                  <ChevronRight size={15} color="rgba(44,24,16,0.2)" strokeWidth={1.5} />
                 </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* Divider — thinner */}
-        <div style={{ margin: '0 20px', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.06)' }} />
+        {/* Divider */}
+        <div style={{ margin: '32px 20px 0', height: '0.5px', backgroundColor: 'var(--color-divider)' }} />
 
-        {/* Settings — more padding, thinner dividers */}
-        <div style={{ padding: '28px 20px 0' }}>
-          <div
-            style={{
-              backgroundColor: 'var(--color-surface)',
-              borderRadius: '16px',
-              boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
-              overflow: 'hidden',
-            }}
-          >
+        {/* Settings — 14px, thin dividers, chevron icons */}
+        <div style={{ padding: '24px 20px 0' }}>
+          <div style={{
+            backgroundColor: 'var(--color-surface)',
+            border: '0.5px solid rgba(44,24,16,0.06)',
+            borderRadius: 12,
+            boxShadow: 'var(--shadow-card)',
+            overflow: 'hidden',
+          }}>
             {settingsItems.map(({ icon: Icon, label }, index) => (
               <button
                 key={label}
@@ -275,8 +271,8 @@ export default function ProfileScreen() {
                   width: '100%',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '14px',
-                  padding: '18px 20px',
+                  gap: 14,
+                  padding: '17px 20px',
                   backgroundColor: 'transparent',
                   border: 'none',
                   borderBottom: index < settingsItems.length - 1 ? '0.5px solid rgba(44,24,16,0.05)' : 'none',
@@ -284,18 +280,24 @@ export default function ProfileScreen() {
                   textAlign: 'left',
                 }}
               >
-                <Icon size={17} color="var(--color-muted)" strokeWidth={1.5} />
-                <span style={{ flex: 1, fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)', fontWeight: 400 }}>
+                <Icon size={16} color="var(--color-muted)" strokeWidth={1.5} />
+                <span style={{
+                  flex: 1,
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 14,
+                  color: 'var(--color-text)',
+                  fontWeight: 400,
+                }}>
                   {label}
                 </span>
-                <ChevronRight size={14} color="var(--color-divider)" strokeWidth={1.5} />
+                <ChevronRight size={13} color="rgba(44,24,16,0.2)" strokeWidth={1.5} />
               </button>
             ))}
           </div>
         </div>
 
-        {/* Sign Out — refined */}
-        <div style={{ padding: '28px 20px 0' }}>
+        {/* Sign Out — outlined, centered, #8B6914 text */}
+        <div style={{ padding: '24px 20px 0' }}>
           <button
             onClick={handleSignOut}
             style={{
@@ -303,16 +305,22 @@ export default function ProfileScreen() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
-              padding: '15px',
+              gap: 8,
+              padding: '14px',
               backgroundColor: 'transparent',
-              border: '0.5px solid rgba(196,113,59,0.3)',
-              borderRadius: '14px',
+              border: '0.5px solid rgba(139,105,20,0.3)',
+              borderRadius: 100,
               cursor: 'pointer',
             }}
           >
-            <LogOut size={15} color="var(--color-accent)" strokeWidth={1.5} />
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: 'var(--color-accent)' }}>
+            <LogOut size={14} color="#8B6914" strokeWidth={1.5} />
+            <span style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 13,
+              fontWeight: 500,
+              color: '#8B6914',
+              letterSpacing: '0.2px',
+            }}>
               Sign Out
             </span>
           </button>

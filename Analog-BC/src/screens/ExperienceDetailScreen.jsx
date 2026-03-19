@@ -52,8 +52,9 @@ export default function ExperienceDetailScreen() {
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', position: 'relative' }}>
-        {/* Hero Image */}
-        <div style={{ position: 'relative', width: '100%', height: '60dvh' }}>
+
+        {/* Hero Image — full-bleed, 340px, no border-radius */}
+        <div className="grain" style={{ position: 'relative', width: '100%', height: 340 }}>
           <img
             src={experience.image}
             alt={experience.name}
@@ -65,24 +66,24 @@ export default function ExperienceDetailScreen() {
               display: 'block',
             }}
           />
-          {/* Gradient overlay */}
+          {/* Gradient overlay — bottom fade to bg */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to bottom, rgba(36,20,12,0.15) 0%, transparent 30%, rgba(36,20,12,0.55) 100%)',
+            background: 'linear-gradient(to bottom, rgba(44,24,16,0.12) 0%, transparent 35%, rgba(250,248,245,1) 100%)',
           }} />
 
-          {/* Back button — refined */}
+          {/* Back button — frosted glass */}
           <button
             onClick={() => navigate(-1)}
             style={{
               position: 'absolute',
               top: 52,
               left: 16,
-              background: 'rgba(250,247,242,0.15)',
+              background: 'rgba(250,248,245,0.15)',
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
-              border: '0.5px solid rgba(250,247,242,0.2)',
+              border: '0.5px solid rgba(250,248,245,0.25)',
               borderRadius: 100,
               width: 38,
               height: 38,
@@ -92,17 +93,18 @@ export default function ExperienceDetailScreen() {
               cursor: 'pointer',
             }}
           >
-            <ChevronLeft size={20} color="#FAF7F2" strokeWidth={1.5} />
+            <ChevronLeft size={20} color="#FAF8F5" strokeWidth={1.5} />
           </button>
         </div>
 
-        {/* Content */}
+        {/* Content — pulls up over the gradient */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.15 }}
-          style={{ padding: '28px 20px 120px', marginTop: -32, position: 'relative', zIndex: 2 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.1 }}
+          style={{ padding: '0 20px 120px', marginTop: -40, position: 'relative', zIndex: 2 }}
         >
+          {/* Title */}
           <h1 style={{
             fontFamily: 'var(--font-heading)',
             fontSize: 32,
@@ -115,52 +117,43 @@ export default function ExperienceDetailScreen() {
             {experience.name}
           </h1>
 
-          {/* Meta — airy spacing */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 20 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Calendar size={15} color="var(--color-muted)" strokeWidth={1.5} />
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', fontWeight: 300 }}>
-                {formatDate(experience.date)}
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Clock size={15} color="var(--color-muted)" strokeWidth={1.5} />
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', fontWeight: 300 }}>
-                {experience.time}
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <MapPin size={15} color="var(--color-muted)" strokeWidth={1.5} />
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', fontWeight: 300 }}>
-                {business.name}
-              </span>
-            </div>
+          {/* Meta details */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 20 }}>
+            <MetaRow icon={<Calendar size={14} color="var(--color-muted)" strokeWidth={1.5} />}>
+              {formatDate(experience.date)}
+            </MetaRow>
+            <MetaRow icon={<Clock size={14} color="var(--color-muted)" strokeWidth={1.5} />}>
+              {experience.time}
+            </MetaRow>
+            <MetaRow icon={<MapPin size={14} color="var(--color-muted)" strokeWidth={1.5} />}>
+              {business.name}
+            </MetaRow>
           </div>
 
-          {/* Attendees */}
+          {/* Attendees row */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: 10,
-            marginTop: 20,
+            marginTop: 16,
           }}>
-            <Users size={15} color="var(--color-accent)" strokeWidth={1.5} />
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-text)', fontWeight: 400 }}>
+            <Users size={14} color="var(--color-accent)" strokeWidth={1.5} />
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-text)', fontWeight: 400 }}>
               {experience.attendees} going
             </span>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-divider)' }}>·</span>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-sage)', fontWeight: 500 }}>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)' }}>·</span>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: '#5DAA68', fontWeight: 500 }}>
               {experience.spotsRemaining} spots left
             </span>
           </div>
 
           {/* Divider */}
-          <div style={{ height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)', margin: '24px 0' }} />
+          <div style={{ height: '0.5px', backgroundColor: 'var(--color-divider)', margin: '28px 0' }} />
 
           {/* Description */}
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 15,
+            fontSize: 14,
             color: 'var(--color-text)',
             lineHeight: 1.7,
             margin: 0,
@@ -170,23 +163,23 @@ export default function ExperienceDetailScreen() {
           </p>
 
           {/* Divider */}
-          <div style={{ height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)', margin: '24px 0' }} />
+          <div style={{ height: '0.5px', backgroundColor: 'var(--color-divider)', margin: '28px 0' }} />
 
-          {/* Tier Requirement — refined card */}
+          {/* Tier Requirement card */}
           <div style={{
             display: 'flex',
             alignItems: 'flex-start',
             gap: 12,
-            padding: 16,
-            backgroundColor: qualifies ? 'rgba(139,157,119,0.06)' : 'rgba(243,237,229,0.5)',
-            borderRadius: 14,
+            padding: '16px 18px',
+            backgroundColor: qualifies ? 'rgba(93,170,104,0.05)' : 'rgba(245,240,235,0.7)',
+            borderRadius: 12,
             border: '0.5px solid',
-            borderColor: qualifies ? 'rgba(139,157,119,0.15)' : 'rgba(44,24,16,0.05)',
+            borderColor: qualifies ? 'rgba(93,170,104,0.18)' : 'rgba(44,24,16,0.06)',
           }}>
             {qualifies ? (
-              <CheckCircle size={17} color="var(--color-sage)" style={{ flexShrink: 0, marginTop: 1 }} strokeWidth={1.5} />
+              <CheckCircle size={16} color="#5DAA68" style={{ flexShrink: 0, marginTop: 2 }} strokeWidth={1.5} />
             ) : (
-              <Info size={17} color="var(--color-accent)" style={{ flexShrink: 0, marginTop: 1 }} strokeWidth={1.5} />
+              <Info size={16} color="var(--color-accent)" style={{ flexShrink: 0, marginTop: 2 }} strokeWidth={1.5} />
             )}
             <div>
               <p style={{
@@ -202,7 +195,7 @@ export default function ExperienceDetailScreen() {
                 <p style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 12,
-                  color: 'var(--color-sage)',
+                  color: '#5DAA68',
                   margin: '5px 0 0',
                   fontWeight: 400,
                 }}>
@@ -225,34 +218,35 @@ export default function ExperienceDetailScreen() {
           </div>
         </motion.div>
 
-        {/* RSVP Button — refined with glass */}
+        {/* Reserve Button — fixed bottom */}
         <div style={{
           position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
           padding: '12px 20px',
-          paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
-          background: 'rgba(250,247,242,0.92)',
+          paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+          background: 'rgba(250,248,245,0.92)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          borderTop: '0.5px solid rgba(44,24,16,0.06)',
+          borderTop: '0.5px solid var(--color-divider)',
           zIndex: 40,
         }}>
           <button
             style={{
               width: '100%',
               padding: '16px 0',
-              backgroundColor: qualifies ? 'var(--color-accent)' : 'var(--color-divider)',
-              color: qualifies ? '#FAF7F2' : 'var(--color-muted)',
+              backgroundColor: qualifies ? '#8B6914' : 'rgba(44,24,16,0.06)',
+              color: qualifies ? '#FAF8F5' : 'var(--color-muted)',
               fontFamily: 'var(--font-body)',
               fontSize: 15,
               fontWeight: 500,
               border: 'none',
-              borderRadius: 14,
+              borderRadius: 100,
               cursor: qualifies ? 'pointer' : 'default',
-              boxShadow: qualifies ? '0 2px 12px rgba(196,113,59,0.2)' : 'none',
+              boxShadow: qualifies ? '0 2px 16px rgba(139,105,20,0.22)' : 'none',
               letterSpacing: '0.3px',
+              transition: 'background 0.2s',
             }}
           >
             Reserve Your Spot
@@ -260,5 +254,21 @@ export default function ExperienceDetailScreen() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+function MetaRow({ icon, children }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      {icon}
+      <span style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 13,
+        color: 'var(--color-muted)',
+        fontWeight: 300,
+      }}>
+        {children}
+      </span>
+    </div>
   );
 }

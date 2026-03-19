@@ -2,9 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, Sparkles, MessageCircle } from 'lucide-react';
 
 const tabs = [
-  { path: '/home', label: 'Home', icon: Home },
-  { path: '/experiences', label: 'Experiences', icon: Sparkles },
-  { path: '/community', label: 'Community', icon: MessageCircle },
+  { path: '/home', icon: Home },
+  { path: '/experiences', icon: Sparkles },
+  { path: '/community', icon: MessageCircle },
 ];
 
 export default function BottomNav() {
@@ -18,19 +18,19 @@ export default function BottomNav() {
         bottom: 0,
         left: 0,
         right: 0,
-        background: 'rgba(250,247,242,0.92)',
-        backdropFilter: 'blur(20px) saturate(1.3)',
-        WebkitBackdropFilter: 'blur(20px) saturate(1.3)',
-        borderTop: '0.5px solid rgba(44,24,16,0.08)',
+        background: 'rgba(250,248,245,0.88)',
+        backdropFilter: 'blur(24px) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(24px) saturate(1.2)',
+        borderTop: '0.5px solid rgba(44,24,16,0.05)',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingTop: '8px',
-        paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
+        paddingTop: '10px',
+        paddingBottom: 'max(10px, env(safe-area-inset-bottom))',
         zIndex: 50,
       }}
     >
-      {tabs.map(({ path, label, icon: Icon }) => {
+      {tabs.map(({ path, icon: Icon }) => {
         const isActive = location.pathname.startsWith(path);
         return (
           <button
@@ -40,39 +40,26 @@ export default function BottomNav() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '2px',
+              gap: '4px',
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '4px 20px',
+              padding: '2px 24px',
               position: 'relative',
             }}
           >
             <Icon
-              size={22}
-              color={isActive ? '#C4713B' : '#8B7E74'}
-              strokeWidth={1.5}
+              size={20}
+              color={isActive ? '#8B6914' : '#C4BAB0'}
+              strokeWidth={1}
             />
-            <span
-              style={{
-                fontSize: '10px',
-                fontFamily: 'var(--font-body)',
-                color: isActive ? '#C4713B' : '#8B7E74',
-                fontWeight: isActive ? 500 : 400,
-                letterSpacing: '0.2px',
-              }}
-            >
-              {label}
-            </span>
-            {/* Active dot indicator */}
             {isActive && (
               <div
                 style={{
-                  width: '4px',
-                  height: '4px',
+                  width: '3px',
+                  height: '3px',
                   borderRadius: '50%',
-                  backgroundColor: '#C4713B',
-                  marginTop: '1px',
+                  backgroundColor: '#8B6914',
                 }}
               />
             )}
