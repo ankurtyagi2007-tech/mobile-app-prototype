@@ -87,7 +87,7 @@ const community = {
           { id: "eo-reply-7", userId: "user-7", userName: "Nina L.", userTier: "First Visit", content: "Yes please! A brunch with your style of cooking would be amazing.", timestamp: "2026-03-15T09:30:00" },
         ],
         poll: {
-          question: "Would you come to a Saturday brunch at Ember & Oak?",
+          question: "Would you come to a Saturday brunch at Rich Table?",
           options: [
             { text: "Absolutely, every weekend", votes: 42 },
             { text: "Once or twice a month", votes: 28 },
@@ -189,7 +189,7 @@ const community = {
         timestamp: "2026-03-11T12:00:00",
         isPinned: false,
         replies: [
-          { id: "eo-reply-12", userId: "staff-1", userName: "Owner: Chef Maria", userTier: "staff", content: "Always. We actually just started a new sourdough with a 10-year starter from a bakery in San Francisco.", timestamp: "2026-03-11T12:30:00" },
+          { id: "eo-reply-12", userId: "staff-1", userName: "Owner: Chef Maria", userTier: "staff", content: "Always. We actually just started a new sourdough with a 10-year starter from a bakery in the Mission.", timestamp: "2026-03-11T12:30:00" },
         ],
         poll: null,
       },
@@ -375,12 +375,12 @@ const community = {
         userId: "staff-4",
         userName: "Owner: Mia",
         userTier: "staff",
-        content: "Happy anniversary to us! Three years of The Copper Still. Thank you all for being part of this community.",
+        content: "Happy anniversary to us! Three years of Bourbon & Branch. Thank you all for being part of this community.",
         timestamp: "2026-03-12T12:00:00",
         isPinned: false,
         replies: [
           { id: "cs-reply-9", userId: "user-21", userName: "Kai M.", userTier: "Keeper of the Keys", content: "Cheers to many more! This place is one of a kind.", timestamp: "2026-03-12T12:15:00" },
-          { id: "cs-reply-10", userId: "user-16", userName: "Alex F.", userTier: "Regular", content: "Best bar in Brooklyn. No contest.", timestamp: "2026-03-12T12:30:00" },
+          { id: "cs-reply-10", userId: "user-16", userName: "Alex F.", userTier: "Regular", content: "Best bar in San Francisco. No contest.", timestamp: "2026-03-12T12:30:00" },
         ],
         poll: null,
       },
@@ -393,7 +393,7 @@ const community = {
         timestamp: "2026-03-11T22:00:00",
         isPinned: false,
         replies: [
-          { id: "cs-reply-11", userId: "staff-3", userName: "Head Bartender: Jake", userTier: "staff", content: "House-made coffee liqueur with cold brew from Morning Ritual down the street. Local collab magic.", timestamp: "2026-03-11T22:15:00" },
+          { id: "cs-reply-11", userId: "staff-3", userName: "Head Bartender: Jake", userTier: "staff", content: "House-made coffee liqueur with cold brew from Sightglass Coffee down the street. Local collab magic.", timestamp: "2026-03-11T22:15:00" },
         ],
         poll: null,
       },
@@ -526,7 +526,7 @@ const community = {
         isPinned: false,
         replies: [],
         poll: {
-          question: "What food would you love to see at Morning Ritual?",
+          question: "What food would you love to see at Sightglass Coffee?",
           options: [
             { text: "Pastries & croissants", votes: 35 },
             { text: "Toast bar (avocado, ricotta, etc.)", votes: 22 },
@@ -634,7 +634,7 @@ const community = {
         timestamp: "2026-03-10T07:45:00",
         isPinned: false,
         replies: [
-          { id: "mr-reply-9", userId: "user-25", userName: "Hannah J.", userTier: "Head Roaster", content: "It really is a ritual, isn't it? Aptly named.", timestamp: "2026-03-10T08:00:00" },
+          { id: "mr-reply-9", userId: "user-25", userName: "Hannah J.", userTier: "Head Roaster", content: "It really is a daily ritual, isn't it? Nothing beats starting the day here.", timestamp: "2026-03-10T08:00:00" },
         ],
         poll: null,
       },
@@ -972,7 +972,7 @@ const community = {
           { id: "tr-reply-8", userId: "user-53", userName: "Elena M.", userTier: "Regular", content: "A cheese and charcuterie program would be perfect. Keep it simple and high quality.", timestamp: "2026-03-14T11:30:00" },
         ],
         poll: {
-          question: "What food program suits Terroir best?",
+          question: "What food program suits Verjus best?",
           options: [
             { text: "Cheese & charcuterie focused", votes: 34 },
             { text: "Small seasonal plates", votes: 21 },

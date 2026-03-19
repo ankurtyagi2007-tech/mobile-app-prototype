@@ -2,7 +2,7 @@ const user = {
   id: "current-user",
   name: "Alex Chen",
   email: "alex@example.com",
-  avatar: "https://picsum.photos/seed/alex-chen/100/100",
+  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
   memberSince: "2025-07-15",
   enrollments: {
     "ember-oak": {

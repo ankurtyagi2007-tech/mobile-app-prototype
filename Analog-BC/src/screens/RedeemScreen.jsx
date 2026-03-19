@@ -14,8 +14,8 @@ const rotateKeyframes = `
   to { transform: rotate(360deg); }
 }
 @keyframes qr-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(196,113,59,0.15); }
-  50% { box-shadow: 0 0 40px rgba(196,113,59,0.3); }
+  0%, 100% { box-shadow: 0 0 24px rgba(196,113,59,0.1); }
+  50% { box-shadow: 0 0 48px rgba(196,113,59,0.2); }
 }
 @keyframes qr-shimmer {
   0% { transform: translateX(-100%); }
@@ -76,19 +76,20 @@ export default function RedeemScreen() {
             transition={{ duration: 0.3 }}
             style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)' }}
           >
-            {/* Back button */}
+            {/* Back button — refined */}
             <button
               onClick={() => navigate(-1)}
               style={{
                 position: 'absolute',
                 top: 52,
                 left: 16,
-                background: 'rgba(44,24,16,0.3)',
-                backdropFilter: 'blur(8px)',
-                border: 'none',
+                background: 'rgba(250,247,242,0.15)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '0.5px solid rgba(250,247,242,0.2)',
                 borderRadius: 100,
-                width: 40,
-                height: 40,
+                width: 38,
+                height: 38,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -96,7 +97,7 @@ export default function RedeemScreen() {
                 zIndex: 10,
               }}
             >
-              <ChevronLeft size={24} color="#FAF7F2" />
+              <ChevronLeft size={20} color="#FAF7F2" strokeWidth={1.5} />
             </button>
 
             {/* Image */}
@@ -105,30 +106,32 @@ export default function RedeemScreen() {
               alt={item.name}
               style={{
                 width: '100%',
-                height: 300,
+                height: 320,
                 objectFit: 'cover',
                 display: 'block',
-                borderRadius: '0 0 20px 20px',
+                borderRadius: '0 0 24px 24px',
               }}
             />
 
-            {/* Details */}
-            <div style={{ padding: '24px 20px 120px' }}>
+            {/* Details — editorial */}
+            <div style={{ padding: '28px 20px 120px' }}>
               <h1 style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 26,
-                fontWeight: 600,
+                fontSize: 28,
+                fontWeight: 500,
                 color: 'var(--color-text)',
                 margin: 0,
                 lineHeight: 1.2,
+                letterSpacing: '0.3px',
               }}>
                 {item.name}
               </h1>
               <p style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: 14,
+                fontSize: 13,
                 color: 'var(--color-muted)',
-                margin: '6px 0 0',
+                margin: '8px 0 0',
+                fontWeight: 300,
               }}>
                 {business.name}
               </p>
@@ -137,23 +140,25 @@ export default function RedeemScreen() {
                 fontFamily: 'var(--font-body)',
                 fontSize: 15,
                 color: 'var(--color-text)',
-                lineHeight: 1.6,
-                margin: '20px 0 0',
+                lineHeight: 1.7,
+                margin: '24px 0 0',
+                fontWeight: 300,
               }}>
                 {item.description}
               </p>
 
               {/* Divider */}
-              <div style={{ height: 1, backgroundColor: 'var(--color-divider)', margin: '24px 0' }} />
+              <div style={{ height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)', margin: '28px 0' }} />
 
-              {/* Points */}
+              {/* Points — editorial treatment */}
               <p style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 36,
-                fontWeight: 600,
+                fontSize: 38,
+                fontWeight: 500,
                 color: 'var(--color-accent)',
                 margin: 0,
                 lineHeight: 1,
+                letterSpacing: '0.5px',
               }}>
                 {item.pointCost} points
               </p>
@@ -161,13 +166,14 @@ export default function RedeemScreen() {
                 fontFamily: 'var(--font-body)',
                 fontSize: 14,
                 color: 'var(--color-muted)',
-                margin: '8px 0 0',
+                margin: '10px 0 0',
+                fontWeight: 300,
               }}>
-                You have <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{userPoints}</span> points at {business.name}
+                You have <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{userPoints}</span> points at {business.name}
               </p>
             </div>
 
-            {/* Redeem Button */}
+            {/* Redeem Button — refined glass bar */}
             <div style={{
               position: 'fixed',
               bottom: 0,
@@ -175,8 +181,10 @@ export default function RedeemScreen() {
               right: 0,
               padding: '12px 20px',
               paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
-              backgroundColor: 'var(--color-bg)',
-              borderTop: '1px solid var(--color-divider)',
+              background: 'rgba(250,247,242,0.92)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              borderTop: '0.5px solid rgba(44,24,16,0.06)',
               zIndex: 40,
             }}>
               <button
@@ -188,11 +196,13 @@ export default function RedeemScreen() {
                   backgroundColor: canAfford ? 'var(--color-accent)' : 'var(--color-divider)',
                   color: canAfford ? '#FAF7F2' : 'var(--color-muted)',
                   fontFamily: 'var(--font-body)',
-                  fontSize: 16,
-                  fontWeight: 600,
+                  fontSize: 15,
+                  fontWeight: 500,
                   border: 'none',
                   borderRadius: 14,
                   cursor: canAfford ? 'pointer' : 'default',
+                  boxShadow: canAfford ? '0 2px 12px rgba(196,113,59,0.2)' : 'none',
+                  letterSpacing: '0.3px',
                 }}
               >
                 {canAfford ? 'Redeem' : 'Not enough points'}
@@ -217,11 +227,12 @@ export default function RedeemScreen() {
           >
             <h2 style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: 30,
-              fontWeight: 600,
+              fontSize: 32,
+              fontWeight: 500,
               color: 'var(--color-text)',
               margin: 0,
               textAlign: 'center',
+              letterSpacing: '0.5px',
             }}>
               Show to Staff
             </h2>
@@ -229,16 +240,17 @@ export default function RedeemScreen() {
               fontFamily: 'var(--font-body)',
               fontSize: 14,
               color: 'var(--color-muted)',
-              margin: '6px 0 0',
+              margin: '8px 0 0',
               textAlign: 'center',
+              fontWeight: 300,
             }}>
               {business.name}
             </p>
 
-            {/* QR Container with animated border */}
+            {/* QR Container with animated border — refined palette */}
             <div style={{
               position: 'relative',
-              marginTop: 40,
+              marginTop: 44,
               width: 240,
               height: 240,
               display: 'flex',
@@ -247,7 +259,7 @@ export default function RedeemScreen() {
               animation: 'qr-pulse 2.5s ease-in-out infinite',
               borderRadius: 24,
             }}>
-              {/* Rotating gradient border */}
+              {/* Rotating gradient border — palette-matched */}
               <div style={{
                 position: 'absolute',
                 inset: -3,
@@ -289,7 +301,7 @@ export default function RedeemScreen() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: 'linear-gradient(105deg, transparent 40%, rgba(196,113,59,0.08) 50%, transparent 60%)',
+                    background: 'linear-gradient(105deg, transparent 40%, rgba(196,113,59,0.06) 50%, transparent 60%)',
                     animation: 'qr-shimmer 2s ease-in-out infinite',
                   }} />
                 </div>
@@ -299,11 +311,12 @@ export default function RedeemScreen() {
             {/* Item name */}
             <p style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: 20,
-              fontWeight: 600,
+              fontSize: 22,
+              fontWeight: 500,
               color: 'var(--color-text)',
-              margin: '28px 0 0',
+              margin: '32px 0 0',
               textAlign: 'center',
+              letterSpacing: '0.3px',
             }}>
               {item.name}
             </p>
@@ -313,24 +326,26 @@ export default function RedeemScreen() {
               color: 'var(--color-muted)',
               margin: '8px 0 0',
               textAlign: 'center',
+              fontWeight: 300,
             }}>
               Present this to your barista
             </p>
 
-            {/* Done button */}
+            {/* Done button — refined */}
             <button
               onClick={() => navigate(-1)}
               style={{
-                marginTop: 40,
+                marginTop: 44,
                 padding: '14px 48px',
                 backgroundColor: 'transparent',
                 color: 'var(--color-text)',
                 fontFamily: 'var(--font-body)',
-                fontSize: 15,
+                fontSize: 14,
                 fontWeight: 500,
-                border: '1.5px solid var(--color-divider)',
+                border: '0.5px solid rgba(44,24,16,0.15)',
                 borderRadius: 14,
                 cursor: 'pointer',
+                letterSpacing: '0.3px',
               }}
             >
               Done

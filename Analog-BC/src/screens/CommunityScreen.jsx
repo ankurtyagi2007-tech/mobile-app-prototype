@@ -95,24 +95,25 @@ export default function CommunityScreen() {
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: 140 }}>
-        {/* Header */}
-        <div style={{ padding: '56px 20px 0' }}>
+        {/* Header — refined */}
+        <div style={{ padding: '60px 20px 0' }}>
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 28,
-            fontWeight: 600,
+            fontSize: 32,
+            fontWeight: 500,
             color: 'var(--color-text)',
             margin: 0,
+            letterSpacing: '0.5px',
           }}>
             Community
           </h1>
         </div>
 
-        {/* Filter Chips */}
+        {/* Filter Chips — subtle */}
         <div style={{
           display: 'flex',
           gap: 8,
-          padding: '16px 20px 0',
+          padding: '18px 20px 0',
           overflowX: 'auto',
           scrollbarWidth: 'none',
         }}>
@@ -123,22 +124,22 @@ export default function CommunityScreen() {
         </div>
 
         {/* Online Indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 20px' }}>
           <div style={{
-            width: 8,
-            height: 8,
+            width: 6,
+            height: 6,
             borderRadius: 100,
             backgroundColor: '#5DAA68',
             flexShrink: 0,
           }} />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)' }}>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-muted)', fontWeight: 300, letterSpacing: '0.2px' }}>
             {onlineStats.guests} guests · {onlineStats.staff} staff online
           </span>
         </div>
 
         {/* Pinned Section */}
         {pinnedMessages.length > 0 && (
-          <div style={{ margin: '0 20px 12px', borderRadius: 12, backgroundColor: 'var(--color-subtle-bg)', overflow: 'hidden' }}>
+          <div style={{ margin: '0 20px 14px', borderRadius: 14, backgroundColor: 'rgba(243,237,229,0.5)', overflow: 'hidden', border: '0.5px solid rgba(44,24,16,0.05)' }}>
             <button
               onClick={() => setPinnedExpanded(!pinnedExpanded)}
               style={{
@@ -146,17 +147,17 @@ export default function CommunityScreen() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '10px 14px',
+                padding: '11px 16px',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
               }}
             >
-              <Pin size={14} color="var(--color-accent)" />
+              <Pin size={13} color="var(--color-accent)" strokeWidth={1.5} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-text)', flex: 1, textAlign: 'left' }}>
                 {pinnedMessages.length} pinned message{pinnedMessages.length > 1 ? 's' : ''}
               </span>
-              {pinnedExpanded ? <ChevronUp size={16} color="var(--color-muted)" /> : <ChevronDown size={16} color="var(--color-muted)" />}
+              {pinnedExpanded ? <ChevronUp size={14} color="var(--color-muted)" strokeWidth={1.5} /> : <ChevronDown size={14} color="var(--color-muted)" strokeWidth={1.5} />}
             </button>
             <AnimatePresence>
               {pinnedExpanded && (
@@ -168,11 +169,11 @@ export default function CommunityScreen() {
                   style={{ overflow: 'hidden' }}
                 >
                   {pinnedMessages.slice(0, 2).map((msg) => (
-                    <div key={msg.id} style={{ padding: '0 14px 10px' }}>
+                    <div key={msg.id} style={{ padding: '0 16px 12px' }}>
                       <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, color: 'var(--color-text)' }}>
                         {msg.userName}
                       </span>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-text)', margin: '2px 0 0', lineHeight: 1.5 }}>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-text)', margin: '2px 0 0', lineHeight: 1.5, fontWeight: 300 }}>
                         {msg.content}
                       </p>
                     </div>
@@ -183,7 +184,7 @@ export default function CommunityScreen() {
           </div>
         )}
 
-        {/* Message Feed */}
+        {/* Message Feed — more breathing room */}
         <div style={{ padding: '0 20px' }}>
           {feedMessages.map((msg) => (
             <MessageBubble
@@ -197,16 +198,18 @@ export default function CommunityScreen() {
           ))}
         </div>
 
-        {/* Composer */}
+        {/* Composer — glass effect */}
         <div style={{
           position: 'fixed',
           bottom: 60,
           left: 0,
           right: 0,
-          padding: '8px 16px',
-          paddingBottom: 8,
-          backgroundColor: 'var(--color-bg)',
-          borderTop: '1px solid var(--color-divider)',
+          padding: '10px 16px',
+          paddingBottom: 10,
+          background: 'rgba(250,247,242,0.92)',
+          backdropFilter: 'blur(20px) saturate(1.3)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.3)',
+          borderTop: '0.5px solid rgba(44,24,16,0.06)',
           display: 'flex',
           alignItems: 'center',
           gap: 10,
@@ -219,17 +222,18 @@ export default function CommunityScreen() {
               flex: 1,
               fontFamily: 'var(--font-body)',
               fontSize: 14,
-              backgroundColor: 'var(--color-surface)',
-              border: '1px solid var(--color-divider)',
+              backgroundColor: 'rgba(255,255,255,0.7)',
+              border: '0.5px solid rgba(44,24,16,0.08)',
               borderRadius: 100,
-              padding: '10px 16px',
+              padding: '10px 18px',
               color: 'var(--color-text)',
               outline: 'none',
+              fontWeight: 300,
             }}
           />
           <button style={{
-            width: 38,
-            height: 38,
+            width: 36,
+            height: 36,
             borderRadius: 100,
             backgroundColor: 'var(--color-accent)',
             border: 'none',
@@ -238,8 +242,9 @@ export default function CommunityScreen() {
             justifyContent: 'center',
             cursor: 'pointer',
             flexShrink: 0,
+            boxShadow: '0 2px 8px rgba(196,113,59,0.2)',
           }}>
-            <Send size={16} color="#FAF7F2" />
+            <Send size={15} color="#FAF7F2" strokeWidth={1.5} />
           </button>
         </div>
 
@@ -254,22 +259,23 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
   const isStaff = msg.userTier === 'staff';
 
   return (
-    <div style={{ marginBottom: 18 }}>
-      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-        {/* Avatar */}
+    <div style={{ marginBottom: 24 }}>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+        {/* Avatar — slightly larger with subtle ring */}
         <div style={{
-          width: 34,
-          height: 34,
+          width: 38,
+          height: 38,
           borderRadius: 100,
-          backgroundColor: avatarBg(msg.userTier),
+          border: `1.5px solid ${avatarBg(msg.userTier)}`,
+          backgroundColor: 'rgba(250,247,242,0.5)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
-          color: '#FAF7F2',
+          color: avatarBg(msg.userTier),
           fontFamily: 'var(--font-heading)',
-          fontSize: 15,
-          fontWeight: 600,
+          fontSize: 16,
+          fontWeight: 500,
         }}>
           {initial(msg.userName)}
         </div>
@@ -301,9 +307,10 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
                 fontSize: 10,
                 fontWeight: 500,
                 color: 'var(--color-accent)',
-                backgroundColor: 'rgba(196,113,59,0.1)',
+                border: '0.5px solid rgba(196,113,59,0.2)',
                 borderRadius: 100,
                 padding: '1px 8px',
+                letterSpacing: '0.3px',
               }}>
                 Staff
               </span>
@@ -315,8 +322,9 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
             fontFamily: 'var(--font-body)',
             fontSize: 14,
             color: 'var(--color-text)',
-            margin: '3px 0 0',
-            lineHeight: 1.55,
+            margin: '4px 0 0',
+            lineHeight: 1.6,
+            fontWeight: 300,
           }}>
             {msg.content}
           </p>
@@ -338,7 +346,8 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
             fontSize: 11,
             color: 'var(--color-muted)',
             display: 'block',
-            marginTop: 4,
+            marginTop: 5,
+            fontWeight: 300,
           }}>
             {relativeTime(msg.timestamp)}
           </span>
@@ -356,7 +365,7 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
                   fontWeight: 500,
                   color: 'var(--color-accent)',
                   cursor: 'pointer',
-                  padding: '4px 0 0',
+                  padding: '6px 0 0',
                 }}
               >
                 {isExpanded ? 'Hide replies' : `View ${msg.replies.length} repl${msg.replies.length === 1 ? 'y' : 'ies'}`}
@@ -376,25 +385,26 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
                         key={reply.id}
                         style={{
                           display: 'flex',
-                          gap: 8,
-                          marginTop: 10,
-                          paddingLeft: 12,
-                          borderLeft: '2px solid var(--color-divider)',
+                          gap: 10,
+                          marginTop: 12,
+                          paddingLeft: 14,
+                          borderLeft: '1px solid rgba(44,24,16,0.08)',
                         }}
                       >
                         <div style={{
-                          width: 26,
-                          height: 26,
+                          width: 28,
+                          height: 28,
                           borderRadius: 100,
-                          backgroundColor: avatarBg(reply.userTier),
+                          border: `1px solid ${avatarBg(reply.userTier)}`,
+                          backgroundColor: 'rgba(250,247,242,0.5)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0,
-                          color: '#FAF7F2',
+                          color: avatarBg(reply.userTier),
                           fontFamily: 'var(--font-heading)',
                           fontSize: 12,
-                          fontWeight: 600,
+                          fontWeight: 500,
                         }}>
                           {initial(reply.userName)}
                         </div>
@@ -407,10 +417,10 @@ function MessageBubble({ msg, isExpanded, onToggleReplies, pollVotes, votePoll }
                               {reply.userTier}
                             </span>
                           </div>
-                          <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-text)', margin: '2px 0 0', lineHeight: 1.5 }}>
+                          <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-text)', margin: '3px 0 0', lineHeight: 1.5, fontWeight: 300 }}>
                             {reply.content}
                           </p>
-                          <span style={{ fontFamily: 'var(--font-body)', fontSize: 10, color: 'var(--color-muted)' }}>
+                          <span style={{ fontFamily: 'var(--font-body)', fontSize: 10, color: 'var(--color-muted)', fontWeight: 300 }}>
                             {relativeTime(reply.timestamp)}
                           </span>
                         </div>
@@ -432,16 +442,17 @@ function PollWidget({ poll, msgId, hasVoted, votedIndex, onVote }) {
 
   return (
     <div style={{
-      marginTop: 10,
-      padding: 12,
+      marginTop: 12,
+      padding: 14,
       backgroundColor: 'var(--color-surface)',
-      borderRadius: 12,
-      boxShadow: 'var(--shadow-card)',
+      borderRadius: 14,
+      boxShadow: '0 1px 6px rgba(44,24,16,0.03)',
+      border: '0.5px solid rgba(44,24,16,0.05)',
     }}>
       <p style={{
         fontFamily: 'var(--font-body)',
         fontSize: 14,
-        fontWeight: 600,
+        fontWeight: 500,
         color: 'var(--color-text)',
         margin: '0 0 10px',
       }}>
@@ -461,11 +472,11 @@ function PollWidget({ poll, msgId, hasVoted, votedIndex, onVote }) {
               display: 'block',
               width: '100%',
               position: 'relative',
-              padding: '9px 12px',
+              padding: '10px 12px',
               marginBottom: i < poll.options.length - 1 ? 6 : 0,
-              borderRadius: 8,
-              border: hasVoted ? 'none' : '1px solid var(--color-divider)',
-              backgroundColor: hasVoted ? 'var(--color-subtle-bg)' : 'transparent',
+              borderRadius: 10,
+              border: hasVoted ? '0.5px solid rgba(44,24,16,0.05)' : '0.5px solid rgba(44,24,16,0.1)',
+              backgroundColor: hasVoted ? 'rgba(243,237,229,0.4)' : 'transparent',
               cursor: hasVoted ? 'default' : 'pointer',
               textAlign: 'left',
               overflow: 'hidden',
@@ -480,8 +491,8 @@ function PollWidget({ poll, msgId, hasVoted, votedIndex, onVote }) {
                 left: 0,
                 bottom: 0,
                 width: `${pct}%`,
-                backgroundColor: isSelected ? 'rgba(196,113,59,0.18)' : 'rgba(196,113,59,0.08)',
-                borderRadius: 8,
+                backgroundColor: isSelected ? 'rgba(196,113,59,0.12)' : 'rgba(196,113,59,0.05)',
+                borderRadius: 10,
                 transition: 'width 0.4s ease',
               }} />
             )}
@@ -489,12 +500,12 @@ function PollWidget({ poll, msgId, hasVoted, votedIndex, onVote }) {
               <span style={{
                 fontSize: 13,
                 color: 'var(--color-text)',
-                fontWeight: isSelected ? 600 : 400,
+                fontWeight: isSelected ? 500 : 300,
               }}>
                 {opt.text}
               </span>
               {hasVoted && (
-                <span style={{ fontSize: 12, color: 'var(--color-muted)', fontWeight: 500, marginLeft: 8, flexShrink: 0 }}>
+                <span style={{ fontSize: 12, color: 'var(--color-muted)', fontWeight: 400, marginLeft: 8, flexShrink: 0 }}>
                   {pct}%
                 </span>
               )}
@@ -504,7 +515,7 @@ function PollWidget({ poll, msgId, hasVoted, votedIndex, onVote }) {
       })}
 
       {hasVoted && (
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--color-muted)', margin: '8px 0 0' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--color-muted)', margin: '10px 0 0', fontWeight: 300 }}>
           {totalVotes} votes
         </p>
       )}
@@ -520,14 +531,16 @@ function Chip({ label, active, onClick }) {
         flexShrink: 0,
         fontFamily: 'var(--font-body)',
         fontSize: 13,
-        fontWeight: 500,
-        border: active ? 'none' : '1px solid var(--color-divider)',
+        fontWeight: active ? 500 : 400,
+        border: '0.5px solid',
+        borderColor: active ? 'var(--color-accent)' : 'rgba(44,24,16,0.1)',
         borderRadius: 100,
-        padding: '6px 16px',
-        backgroundColor: active ? 'var(--color-accent)' : 'var(--color-surface)',
-        color: active ? '#FAF7F2' : 'var(--color-text)',
+        padding: '7px 16px',
+        backgroundColor: active ? 'rgba(196,113,59,0.06)' : 'transparent',
+        color: active ? 'var(--color-accent)' : 'var(--color-text)',
         cursor: 'pointer',
         whiteSpace: 'nowrap',
+        letterSpacing: '0.2px',
       }}
     >
       {label}

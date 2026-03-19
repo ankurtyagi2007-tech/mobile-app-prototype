@@ -51,10 +51,11 @@ export default function ProfileScreen() {
           <h1
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '22px',
-              fontWeight: 600,
+              fontSize: '24px',
+              fontWeight: 500,
               color: 'var(--color-text)',
               margin: 0,
+              letterSpacing: '0.5px',
             }}
           >
             Profile
@@ -62,10 +63,10 @@ export default function ProfileScreen() {
           <button
             onClick={() => navigate(-1)}
             style={{
-              width: '36px',
-              height: '36px',
+              width: '34px',
+              height: '34px',
               borderRadius: '50%',
-              backgroundColor: 'var(--color-subtle-bg)',
+              backgroundColor: 'rgba(243,237,229,0.6)',
               border: 'none',
               cursor: 'pointer',
               display: 'flex',
@@ -73,11 +74,11 @@ export default function ProfileScreen() {
               justifyContent: 'center',
             }}
           >
-            <X size={18} color="var(--color-text)" strokeWidth={1.5} />
+            <X size={16} color="var(--color-text)" strokeWidth={1.5} />
           </button>
         </div>
 
-        {/* User section */}
+        {/* User section — editorial, larger avatar */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,17 +87,17 @@ export default function ProfileScreen() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '16px 20px 28px',
+            padding: '20px 20px 32px',
           }}
         >
           <div
             style={{
-              width: '88px',
-              height: '88px',
+              width: '96px',
+              height: '96px',
               borderRadius: '50%',
               overflow: 'hidden',
-              border: '3px solid var(--color-divider)',
-              marginBottom: '14px',
+              border: '1.5px solid rgba(44,24,16,0.1)',
+              marginBottom: '16px',
             }}
           >
             <img
@@ -108,10 +109,11 @@ export default function ProfileScreen() {
           <h2
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '28px',
-              fontWeight: 600,
+              fontSize: '32px',
+              fontWeight: 500,
               color: 'var(--color-text)',
-              margin: '0 0 4px',
+              margin: '0 0 5px',
+              letterSpacing: '0.5px',
             }}
           >
             {currentUser.name}
@@ -122,18 +124,23 @@ export default function ProfileScreen() {
               fontSize: '13px',
               color: 'var(--color-muted)',
               margin: 0,
+              fontWeight: 300,
+              letterSpacing: '0.3px',
             }}
           >
             Member since {memberSinceText}
           </p>
         </motion.div>
 
-        {/* Overall stats */}
-        <div style={{ padding: '0 20px 24px' }}>
+        {/* Overall stats — more visual weight on numbers */}
+        <div style={{ padding: '0 20px 28px' }}>
           <div
             style={{
               display: 'flex',
-              gap: '12px',
+              gap: '1px',
+              backgroundColor: 'rgba(44,24,16,0.04)',
+              borderRadius: '16px',
+              overflow: 'hidden',
             }}
           >
             {[
@@ -149,19 +156,18 @@ export default function ProfileScreen() {
                 style={{
                   flex: 1,
                   textAlign: 'center',
-                  padding: '18px 8px',
+                  padding: '20px 8px',
                   backgroundColor: 'var(--color-surface)',
-                  borderRadius: '14px',
-                  boxShadow: 'var(--shadow-card)',
                 }}
               >
                 <p
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '24px',
-                    fontWeight: 600,
+                    fontSize: '26px',
+                    fontWeight: 500,
                     color: 'var(--color-text)',
-                    margin: '0 0 2px',
+                    margin: '0 0 4px',
+                    lineHeight: 1,
                   }}
                 >
                   {stat.value}
@@ -169,11 +175,12 @@ export default function ProfileScreen() {
                 <p
                   style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '11px',
+                    fontSize: '10px',
                     color: 'var(--color-muted)',
                     margin: 0,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
+                    letterSpacing: '1.5px',
+                    fontWeight: 300,
                   }}
                 >
                   {stat.label}
@@ -183,15 +190,16 @@ export default function ProfileScreen() {
           </div>
         </div>
 
-        {/* Your Places */}
-        <div style={{ padding: '0 20px 24px' }}>
+        {/* Your Places — use thumbnailImage */}
+        <div style={{ padding: '0 20px 28px' }}>
           <h3
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '22px',
-              fontWeight: 600,
+              fontSize: '24px',
+              fontWeight: 500,
               color: 'var(--color-text)',
-              margin: '0 0 14px',
+              margin: '0 0 16px',
+              letterSpacing: '0.5px',
             }}
           >
             Your Places
@@ -212,8 +220,8 @@ export default function ProfileScreen() {
                     gap: '14px',
                     padding: '16px',
                     backgroundColor: 'var(--color-surface)',
-                    borderRadius: '14px',
-                    boxShadow: 'var(--shadow-card)',
+                    borderRadius: '16px',
+                    boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
                     cursor: 'pointer',
                   }}
                 >
@@ -227,36 +235,36 @@ export default function ProfileScreen() {
                     }}
                   >
                     <img
-                      src={`https://picsum.photos/seed/${business.imageSeed}/96/96`}
+                      src={business.thumbnailImage}
                       alt={business.name}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 2px' }}>
+                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 3px' }}>
                       {business.name}
                     </p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: 0, fontWeight: 300 }}>
                       {enrollment.currentTier} &middot; {enrollment.visits} visits
                     </p>
                   </div>
-                  <ChevronRight size={18} color="var(--color-muted)" strokeWidth={1.5} />
+                  <ChevronRight size={16} color="var(--color-divider)" strokeWidth={1.5} />
                 </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ margin: '0 20px', height: '1px', backgroundColor: 'var(--color-divider)' }} />
+        {/* Divider — thinner */}
+        <div style={{ margin: '0 20px', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.06)' }} />
 
-        {/* Settings */}
-        <div style={{ padding: '24px 20px 0' }}>
+        {/* Settings — more padding, thinner dividers */}
+        <div style={{ padding: '28px 20px 0' }}>
           <div
             style={{
               backgroundColor: 'var(--color-surface)',
-              borderRadius: '14px',
-              boxShadow: 'var(--shadow-card)',
+              borderRadius: '16px',
+              boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
               overflow: 'hidden',
             }}
           >
@@ -268,25 +276,25 @@ export default function ProfileScreen() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  padding: '16px 20px',
+                  padding: '18px 20px',
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: index < settingsItems.length - 1 ? '1px solid var(--color-divider)' : 'none',
+                  borderBottom: index < settingsItems.length - 1 ? '0.5px solid rgba(44,24,16,0.05)' : 'none',
                   cursor: 'pointer',
                   textAlign: 'left',
                 }}
               >
-                <Icon size={18} color="var(--color-muted)" strokeWidth={1.5} />
-                <span style={{ flex: 1, fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)' }}>
+                <Icon size={17} color="var(--color-muted)" strokeWidth={1.5} />
+                <span style={{ flex: 1, fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)', fontWeight: 400 }}>
                   {label}
                 </span>
-                <ChevronRight size={16} color="var(--color-divider)" strokeWidth={1.5} />
+                <ChevronRight size={14} color="var(--color-divider)" strokeWidth={1.5} />
               </button>
             ))}
           </div>
         </div>
 
-        {/* Sign Out */}
+        {/* Sign Out — refined */}
         <div style={{ padding: '28px 20px 0' }}>
           <button
             onClick={handleSignOut}
@@ -298,13 +306,13 @@ export default function ProfileScreen() {
               gap: '8px',
               padding: '15px',
               backgroundColor: 'transparent',
-              border: '1px solid var(--color-accent)',
-              borderRadius: '12px',
+              border: '0.5px solid rgba(196,113,59,0.3)',
+              borderRadius: '14px',
               cursor: 'pointer',
             }}
           >
-            <LogOut size={16} color="var(--color-accent)" strokeWidth={1.5} />
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 500, color: 'var(--color-accent)' }}>
+            <LogOut size={15} color="var(--color-accent)" strokeWidth={1.5} />
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: 'var(--color-accent)' }}>
               Sign Out
             </span>
           </button>

@@ -19,15 +19,18 @@ export default function LoginScreen() {
 
   const inputStyle = {
     width: '100%',
-    padding: '14px 16px',
-    border: '1px solid var(--color-divider)',
-    borderRadius: '12px',
+    padding: '14px 0',
+    border: 'none',
+    borderBottom: '1px solid rgba(44,24,16,0.15)',
+    borderRadius: 0,
     fontSize: '15px',
     fontFamily: 'var(--font-body)',
-    backgroundColor: 'var(--color-surface)',
+    backgroundColor: 'transparent',
     color: 'var(--color-text)',
     outline: 'none',
-    transition: 'border-color 0.2s',
+    transition: 'border-color 0.3s ease',
+    fontWeight: 300,
+    letterSpacing: '0.2px',
   };
 
   return (
@@ -35,8 +38,9 @@ export default function LoginScreen() {
       <div style={{ position: 'relative', width: '100%', height: '100dvh', overflow: 'hidden' }}>
         {/* Full-bleed background */}
         <img
-          src="https://picsum.photos/seed/analog-dining/390/844"
+          src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=1600&fit=crop&q=80"
           alt=""
+          className="img-mood"
           style={{
             position: 'absolute',
             inset: 0,
@@ -46,12 +50,12 @@ export default function LoginScreen() {
           }}
         />
 
-        {/* Gradient overlay */}
+        {/* Gradient overlay — warm atmospheric */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(44,24,16,0.85) 0%, rgba(44,24,16,0.6) 40%, transparent 70%)',
+            background: 'linear-gradient(to top, rgba(44,24,16,0.88) 0%, rgba(44,24,16,0.5) 35%, rgba(44,24,16,0.15) 65%, transparent 100%)',
           }}
         />
 
@@ -64,18 +68,23 @@ export default function LoginScreen() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            padding: '0 24px 40px',
+            padding: '0 24px 48px',
           }}
         >
           {/* Wordmark */}
-          <div style={{ marginBottom: '28px', textAlign: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            style={{ marginBottom: '32px', textAlign: 'center' }}
+          >
             <h1
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '48px',
+                fontSize: '54px',
                 fontWeight: 400,
                 color: '#FAF7F2',
-                letterSpacing: '2px',
+                letterSpacing: '3px',
                 margin: 0,
                 lineHeight: 1.1,
               }}
@@ -85,27 +94,30 @@ export default function LoginScreen() {
             <p
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: 300,
-                color: 'rgba(250,247,242,0.8)',
-                margin: '8px 0 0',
-                letterSpacing: '0.5px',
+                color: 'rgba(250,247,242,0.7)',
+                margin: '10px 0 0',
+                letterSpacing: '1.5px',
+                textTransform: 'uppercase',
               }}
             >
               Your places are waiting
             </p>
-          </div>
+          </motion.div>
 
-          {/* Card */}
+          {/* Card — glassmorphism */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
             style={{
-              backgroundColor: 'rgba(250,247,242,0.95)',
-              borderRadius: '16px',
+              background: 'rgba(250,247,242,0.88)',
+              backdropFilter: 'blur(24px) saturate(1.2)',
+              WebkitBackdropFilter: 'blur(24px) saturate(1.2)',
+              borderRadius: '20px',
               padding: '28px 24px',
-              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 40px rgba(44,24,16,0.12)',
             }}
           >
             {/* Tabs */}
@@ -113,8 +125,8 @@ export default function LoginScreen() {
               style={{
                 display: 'flex',
                 marginBottom: '24px',
-                backgroundColor: 'var(--color-subtle-bg)',
-                borderRadius: '10px',
+                backgroundColor: 'rgba(243,237,229,0.7)',
+                borderRadius: '12px',
                 padding: '3px',
               }}
             >
@@ -126,15 +138,16 @@ export default function LoginScreen() {
                     flex: 1,
                     padding: '10px 0',
                     border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '14px',
+                    borderRadius: '10px',
+                    fontSize: '13px',
                     fontWeight: 500,
                     fontFamily: 'var(--font-body)',
                     cursor: 'pointer',
                     backgroundColor: mode === m ? 'var(--color-surface)' : 'transparent',
                     color: mode === m ? 'var(--color-text)' : 'var(--color-muted)',
-                    boxShadow: mode === m ? '0 1px 4px rgba(44,24,16,0.08)' : 'none',
-                    transition: 'all 0.2s',
+                    boxShadow: mode === m ? '0 1px 6px rgba(44,24,16,0.06)' : 'none',
+                    transition: 'all 0.25s ease',
+                    letterSpacing: '0.3px',
                   }}
                 >
                   {m === 'login' ? 'Log In' : 'Sign Up'}
@@ -143,24 +156,24 @@ export default function LoginScreen() {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <input
                 type="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = 'var(--color-accent)')}
-                onBlur={(e) => (e.target.style.borderColor = 'var(--color-divider)')}
+                onFocus={(e) => (e.target.style.borderBottomColor = 'var(--color-accent)')}
+                onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(44,24,16,0.15)')}
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = 'var(--color-accent)')}
-                onBlur={(e) => (e.target.style.borderColor = 'var(--color-divider)')}
+                style={{ ...inputStyle, marginBottom: '8px' }}
+                onFocus={(e) => (e.target.style.borderBottomColor = 'var(--color-accent)')}
+                onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(44,24,16,0.15)')}
               />
 
               <button
@@ -171,12 +184,14 @@ export default function LoginScreen() {
                   backgroundColor: 'var(--color-accent)',
                   color: '#FAF7F2',
                   border: 'none',
-                  borderRadius: '12px',
-                  fontSize: '16px',
-                  fontWeight: 600,
+                  borderRadius: '14px',
+                  fontSize: '15px',
+                  fontWeight: 500,
                   fontFamily: 'var(--font-body)',
                   cursor: 'pointer',
-                  marginTop: '4px',
+                  marginTop: '8px',
+                  boxShadow: '0 2px 12px rgba(196,113,59,0.2)',
+                  letterSpacing: '0.3px',
                 }}
               >
                 Continue
@@ -188,15 +203,15 @@ export default function LoginScreen() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
-                margin: '20px 0',
+                gap: '14px',
+                margin: '22px 0',
               }}
             >
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--color-divider)' }} />
-              <span style={{ fontSize: '12px', color: 'var(--color-muted)', fontFamily: 'var(--font-body)', whiteSpace: 'nowrap' }}>
+              <div style={{ flex: 1, height: '0.5px', backgroundColor: 'rgba(44,24,16,0.1)' }} />
+              <span style={{ fontSize: '11px', color: 'var(--color-muted)', fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                 or continue with
               </span>
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--color-divider)' }} />
+              <div style={{ flex: 1, height: '0.5px', backgroundColor: 'rgba(44,24,16,0.1)' }} />
             </div>
 
             {/* Social buttons */}
@@ -208,10 +223,10 @@ export default function LoginScreen() {
                   style={{
                     flex: 1,
                     padding: '12px',
-                    border: '1px solid var(--color-divider)',
+                    border: '0.5px solid rgba(44,24,16,0.12)',
                     borderRadius: '12px',
                     backgroundColor: 'transparent',
-                    fontSize: '14px',
+                    fontSize: '13px',
                     fontWeight: 500,
                     fontFamily: 'var(--font-body)',
                     color: 'var(--color-text)',
@@ -220,6 +235,7 @@ export default function LoginScreen() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '8px',
+                    letterSpacing: '0.2px',
                   }}
                 >
                   <span style={{ display: 'flex', alignItems: 'center' }}>

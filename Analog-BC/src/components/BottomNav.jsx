@@ -18,12 +18,15 @@ export default function BottomNav() {
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#2C1810',
+        background: 'rgba(250,247,242,0.92)',
+        backdropFilter: 'blur(20px) saturate(1.3)',
+        WebkitBackdropFilter: 'blur(20px) saturate(1.3)',
+        borderTop: '0.5px solid rgba(44,24,16,0.08)',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingTop: '10px',
-        paddingBottom: 'max(10px, env(safe-area-inset-bottom))',
+        paddingTop: '8px',
+        paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
         zIndex: 50,
       }}
     >
@@ -37,28 +40,42 @@ export default function BottomNav() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '4px',
+              gap: '2px',
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '4px 16px',
+              padding: '4px 20px',
+              position: 'relative',
             }}
           >
             <Icon
               size={22}
-              color={isActive ? '#C4713B' : '#FAF7F2'}
-              strokeWidth={isActive ? 2.5 : 1.5}
+              color={isActive ? '#C4713B' : '#8B7E74'}
+              strokeWidth={1.5}
             />
             <span
               style={{
                 fontSize: '10px',
                 fontFamily: 'var(--font-body)',
-                color: isActive ? '#C4713B' : '#FAF7F2',
-                fontWeight: isActive ? 600 : 400,
+                color: isActive ? '#C4713B' : '#8B7E74',
+                fontWeight: isActive ? 500 : 400,
+                letterSpacing: '0.2px',
               }}
             >
               {label}
             </span>
+            {/* Active dot indicator */}
+            {isActive && (
+              <div
+                style={{
+                  width: '4px',
+                  height: '4px',
+                  borderRadius: '50%',
+                  backgroundColor: '#C4713B',
+                  marginTop: '1px',
+                }}
+              />
+            )}
           </button>
         );
       })}

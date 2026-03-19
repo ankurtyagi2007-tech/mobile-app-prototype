@@ -16,7 +16,7 @@ export default function HomeScreen() {
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)' }}>
-        {/* Top bar */}
+        {/* Top bar — refined */}
         <div
           style={{
             position: 'sticky',
@@ -26,13 +26,15 @@ export default function HomeScreen() {
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '16px 20px',
-            backgroundColor: 'var(--color-bg)',
+            background: 'rgba(250,247,242,0.92)',
+            backdropFilter: 'blur(16px) saturate(1.2)',
+            WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
           }}
         >
           <h1
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '28px',
+              fontSize: '26px',
               fontWeight: 400,
               color: 'var(--color-text)',
               margin: 0,
@@ -44,11 +46,11 @@ export default function HomeScreen() {
           <button
             onClick={() => navigate('/profile')}
             style={{
-              width: '36px',
-              height: '36px',
+              width: '34px',
+              height: '34px',
               borderRadius: '50%',
               overflow: 'hidden',
-              border: '2px solid var(--color-divider)',
+              border: '1.5px solid rgba(44,24,16,0.1)',
               padding: 0,
               cursor: 'pointer',
               background: 'none',
@@ -62,13 +64,13 @@ export default function HomeScreen() {
           </button>
         </div>
 
-        {/* Business cards */}
+        {/* Business cards — immersive full-viewport */}
         <div
           style={{
             padding: '0 16px 100px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px',
+            gap: '20px',
             scrollSnapType: 'y mandatory',
             overflowY: 'auto',
           }}
@@ -80,14 +82,15 @@ export default function HomeScreen() {
                 key={business.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                whileHover={{ scale: 1.005 }}
                 onClick={() => navigate(`/business/${business.id}`)}
                 style={{
                   scrollSnapAlign: 'start',
                   position: 'relative',
                   height: 'calc(85dvh - 60px)',
                   minHeight: '580px',
-                  borderRadius: '20px',
+                  borderRadius: '24px',
                   overflow: 'hidden',
                   cursor: 'pointer',
                   flexShrink: 0,
@@ -95,8 +98,9 @@ export default function HomeScreen() {
               >
                 {/* Background image */}
                 <img
-                  src={`https://picsum.photos/seed/${business.imageSeed}/390/700`}
+                  src={business.heroImage}
                   alt={business.name}
+                  className="img-mood"
                   style={{
                     position: 'absolute',
                     inset: 0,
@@ -106,97 +110,95 @@ export default function HomeScreen() {
                   }}
                 />
 
-                {/* Gradient */}
+                {/* Sophisticated gradient overlay */}
                 <div
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(44,24,16,0.9) 0%, rgba(44,24,16,0.4) 40%, transparent 60%)',
+                    background: `linear-gradient(
+                      to top,
+                      rgba(36,20,12,0.92) 0%,
+                      rgba(36,20,12,0.7) 25%,
+                      rgba(36,20,12,0.25) 50%,
+                      rgba(36,20,12,0.05) 70%,
+                      transparent 100%
+                    )`,
                   }}
                 />
 
-                {/* Content */}
+                {/* Content — editorial layout */}
                 <div
                   style={{
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    padding: '32px 24px',
+                    padding: '36px 28px',
                   }}
                 >
-                  <h2
-                    style={{
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: '30px',
-                      fontWeight: 600,
-                      color: '#FAF7F2',
-                      margin: '0 0 4px',
-                      lineHeight: 1.15,
-                    }}
-                  >
-                    {business.name}
-                  </h2>
+                  {/* Category label */}
                   <p
                     style={{
                       fontFamily: 'var(--font-body)',
-                      fontSize: '13px',
-                      color: 'rgba(250,247,242,0.7)',
-                      margin: '0 0 20px',
+                      fontSize: '11px',
+                      color: 'rgba(250,247,242,0.5)',
+                      margin: '0 0 8px',
                       fontWeight: 400,
-                      letterSpacing: '0.5px',
+                      letterSpacing: '2px',
                       textTransform: 'uppercase',
                     }}
                   >
                     {business.category}
                   </p>
 
-                  {/* Stats row */}
+                  {/* Business name — editorial */}
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '36px',
+                      fontWeight: 500,
+                      color: '#FAF7F2',
+                      margin: '0 0 20px',
+                      lineHeight: 1.1,
+                      letterSpacing: '1px',
+                    }}
+                  >
+                    {business.name}
+                  </h2>
+
+                  {/* Stats row — editorial style */}
                   <div
                     style={{
                       display: 'flex',
-                      gap: '20px',
-                      marginBottom: '12px',
+                      gap: '28px',
+                      alignItems: 'flex-end',
                     }}
                   >
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '20px', fontWeight: 600, color: '#FAF7F2' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '24px', fontWeight: 600, color: '#FAF7F2', lineHeight: 1 }}>
                         {enrollment.visits}
                       </span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(250,247,242,0.6)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(250,247,242,0.45)', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '4px' }}>
                         Visits
                       </span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '20px', fontWeight: 600, color: '#FAF7F2' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '24px', fontWeight: 600, color: '#FAF7F2', lineHeight: 1 }}>
                         {enrollment.points}
                       </span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(250,247,242,0.6)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(250,247,242,0.45)', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '4px' }}>
                         Points
                       </span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: '#FAF7F2' }}>
+                      <span style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 500, color: 'rgba(250,247,242,0.8)', fontStyle: 'italic', lineHeight: 1.2 }}>
                         {enrollment.currentTier}
                       </span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(250,247,242,0.6)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(250,247,242,0.45)', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '4px' }}>
                         Tier
                       </span>
                     </div>
                   </div>
-
-                  {/* Next unlock */}
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      fontSize: '13px',
-                      color: 'var(--color-accent)',
-                      margin: 0,
-                      fontWeight: 500,
-                    }}
-                  >
-                    Next: {enrollment.nextUnlock}
-                  </p>
                 </div>
               </motion.div>
             );

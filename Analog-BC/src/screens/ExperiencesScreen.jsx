@@ -38,24 +38,25 @@ export default function ExperiencesScreen() {
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: 80 }}>
-        {/* Header */}
-        <div style={{ padding: '56px 20px 0' }}>
+        {/* Header — refined */}
+        <div style={{ padding: '60px 20px 0' }}>
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 28,
-            fontWeight: 600,
+            fontSize: 32,
+            fontWeight: 500,
             color: 'var(--color-text)',
             margin: 0,
+            letterSpacing: '0.5px',
           }}>
             Experiences
           </h1>
         </div>
 
-        {/* Filter Chips */}
+        {/* Filter Chips — subtle treatment */}
         <div style={{
           display: 'flex',
           gap: 8,
-          padding: '16px 20px',
+          padding: '18px 20px',
           overflowX: 'auto',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -90,16 +91,16 @@ export default function ExperiencesScreen() {
                 key={exp.id}
                 onClick={() => enrolled && navigate(`/experience/${exp.id}`)}
                 style={{
-                  borderRadius: 14,
+                  borderRadius: 16,
                   overflow: 'hidden',
                   backgroundColor: 'var(--color-surface)',
-                  boxShadow: 'var(--shadow-card)',
+                  boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
                   cursor: enrolled ? 'pointer' : 'default',
                   position: 'relative',
                 }}
               >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: 160 }}>
+                {/* Image — larger */}
+                <div style={{ position: 'relative', width: '100%', height: 180 }}>
                   <img
                     src={exp.image}
                     alt={exp.name}
@@ -115,21 +116,25 @@ export default function ExperiencesScreen() {
                     <div style={{
                       position: 'absolute',
                       inset: 0,
-                      backgroundColor: 'rgba(44,24,16,0.55)',
+                      background: 'rgba(250,247,242,0.75)',
+                      backdropFilter: 'blur(8px) saturate(1.2)',
+                      WebkitBackdropFilter: 'blur(8px) saturate(1.2)',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: 6,
+                      gap: 8,
                       padding: 12,
                     }}>
-                      <Lock size={22} color="#FAF7F2" />
+                      <Lock size={20} color="var(--color-muted)" strokeWidth={1.5} />
                       <span style={{
                         fontFamily: 'var(--font-body)',
                         fontSize: 11,
-                        color: '#FAF7F2',
+                        color: 'var(--color-text)',
                         textAlign: 'center',
                         lineHeight: 1.3,
+                        fontWeight: 400,
+                        letterSpacing: '0.2px',
                       }}>
                         Visit {bName} to unlock
                       </span>
@@ -138,11 +143,11 @@ export default function ExperiencesScreen() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '10px 12px 12px' }}>
+                <div style={{ padding: '12px 14px 14px' }}>
                   <h3 style={{
                     fontFamily: 'var(--font-heading)',
                     fontSize: 16,
-                    fontWeight: 600,
+                    fontWeight: 500,
                     color: 'var(--color-text)',
                     margin: 0,
                     lineHeight: 1.25,
@@ -153,7 +158,8 @@ export default function ExperiencesScreen() {
                     fontFamily: 'var(--font-body)',
                     fontSize: 12,
                     color: 'var(--color-muted)',
-                    margin: '4px 0 0',
+                    margin: '5px 0 0',
+                    fontWeight: 300,
                   }}>
                     {formatDate(exp.date)} · {exp.time}
                   </p>
@@ -162,30 +168,33 @@ export default function ExperiencesScreen() {
                     fontSize: 11,
                     color: 'var(--color-muted)',
                     margin: '2px 0 0',
+                    fontWeight: 300,
                   }}>
                     {bName}
                   </p>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                     <span style={{
                       fontFamily: 'var(--font-body)',
                       fontSize: 10,
-                      fontWeight: 500,
-                      color: '#FFFFFF',
-                      backgroundColor: 'var(--color-sage)',
+                      fontWeight: 400,
+                      color: 'var(--color-sage)',
+                      border: '0.5px solid rgba(139,157,119,0.3)',
                       borderRadius: 100,
-                      padding: '2px 8px',
+                      padding: '3px 8px',
+                      letterSpacing: '0.2px',
                     }}>
                       {exp.spotsRemaining} spots left
                     </span>
                     <span style={{
                       fontFamily: 'var(--font-body)',
                       fontSize: 10,
-                      fontWeight: 500,
+                      fontWeight: 400,
                       color: 'var(--color-accent)',
-                      backgroundColor: 'rgba(196,113,59,0.1)',
+                      border: '0.5px solid rgba(196,113,59,0.25)',
                       borderRadius: 100,
-                      padding: '2px 8px',
+                      padding: '3px 8px',
+                      letterSpacing: '0.2px',
                     }}>
                       {exp.tierRequired}
                     </span>
@@ -210,14 +219,16 @@ function Chip({ label, active, onClick }) {
         flexShrink: 0,
         fontFamily: 'var(--font-body)',
         fontSize: 13,
-        fontWeight: 500,
-        border: active ? 'none' : '1px solid var(--color-divider)',
+        fontWeight: active ? 500 : 400,
+        border: '0.5px solid',
+        borderColor: active ? 'var(--color-accent)' : 'rgba(44,24,16,0.1)',
         borderRadius: 100,
-        padding: '6px 16px',
-        backgroundColor: active ? 'var(--color-accent)' : 'var(--color-surface)',
-        color: active ? '#FAF7F2' : 'var(--color-text)',
+        padding: '7px 16px',
+        backgroundColor: active ? 'rgba(196,113,59,0.06)' : 'transparent',
+        color: active ? 'var(--color-accent)' : 'var(--color-text)',
         cursor: 'pointer',
         whiteSpace: 'nowrap',
+        letterSpacing: '0.2px',
       }}
     >
       {label}

@@ -34,11 +34,12 @@ export default function BusinessScreen() {
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: '40px' }}>
-        {/* Hero */}
-        <div style={{ position: 'relative', height: '300px', overflow: 'hidden' }}>
+        {/* Hero — taller, more editorial */}
+        <div style={{ position: 'relative', height: '350px', overflow: 'hidden' }}>
           <img
-            src={`https://picsum.photos/seed/${business.imageSeed}/390/300`}
+            src={business.heroImage}
             alt={business.name}
+            className="img-mood"
             style={{
               width: '100%',
               height: '100%',
@@ -49,23 +50,30 @@ export default function BusinessScreen() {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to top, rgba(44,24,16,0.8) 0%, transparent 50%)',
+              background: `linear-gradient(
+                to top,
+                rgba(36,20,12,0.85) 0%,
+                rgba(36,20,12,0.4) 40%,
+                rgba(36,20,12,0.1) 65%,
+                transparent 100%
+              )`,
             }}
           />
 
-          {/* Back button */}
+          {/* Back button — refined */}
           <button
             onClick={() => navigate(-1)}
             style={{
               position: 'absolute',
-              top: '16px',
+              top: '52px',
               left: '16px',
-              width: '40px',
-              height: '40px',
+              width: '38px',
+              height: '38px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(44,24,16,0.4)',
-              backdropFilter: 'blur(10px)',
-              border: 'none',
+              backgroundColor: 'rgba(250,247,242,0.15)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '0.5px solid rgba(250,247,242,0.2)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -73,72 +81,73 @@ export default function BusinessScreen() {
               zIndex: 2,
             }}
           >
-            <ChevronLeft size={22} color="#FAF7F2" />
+            <ChevronLeft size={20} color="#FAF7F2" strokeWidth={1.5} />
           </button>
 
-          {/* Hero text */}
-          <div style={{ position: 'absolute', bottom: '24px', left: '20px', right: '20px' }}>
-            <h1
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: '32px',
-                fontWeight: 600,
-                color: '#FAF7F2',
-                margin: '0 0 4px',
-                lineHeight: 1.15,
-              }}
-            >
-              {business.name}
-            </h1>
+          {/* Hero text — editorial */}
+          <div style={{ position: 'absolute', bottom: '28px', left: '24px', right: '24px' }}>
             <p
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '13px',
-                color: 'rgba(250,247,242,0.7)',
-                margin: 0,
+                fontSize: '11px',
+                color: 'rgba(250,247,242,0.5)',
+                margin: '0 0 6px',
                 textTransform: 'uppercase',
-                letterSpacing: '0.5px',
+                letterSpacing: '2px',
               }}
             >
               {business.category}
             </p>
+            <h1
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '36px',
+                fontWeight: 500,
+                color: '#FAF7F2',
+                margin: 0,
+                lineHeight: 1.1,
+                letterSpacing: '0.5px',
+              }}
+            >
+              {business.name}
+            </h1>
           </div>
         </div>
 
-        {/* Current Tier Card */}
+        {/* Current Tier Card — refined */}
         {enrollment?.enrolled && (
-          <div style={{ padding: '20px 20px 0' }}>
+          <div style={{ padding: '24px 20px 0' }}>
             <div
               style={{
                 backgroundColor: 'var(--color-surface)',
-                borderRadius: '16px',
+                borderRadius: '18px',
                 padding: '24px',
-                boxShadow: 'var(--shadow-card)',
+                boxShadow: '0 1px 12px rgba(44,24,16,0.05)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '18px' }}>
                 <div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--color-muted)', margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 400 }}>
                     Your Recognition
                   </p>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '26px', fontWeight: 600, color: 'var(--color-text)', margin: 0 }}>
+                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '28px', fontWeight: 500, color: 'var(--color-text)', margin: 0 }}>
                     {enrollment.currentTier}
                   </h2>
                 </div>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: 'var(--color-text)' }}>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 400, color: 'var(--color-muted)' }}>
                   {enrollment.visits} visits
                 </span>
               </div>
 
-              {/* Progress bar */}
+              {/* Progress bar — thinner, refined */}
               {nextTier && (
                 <div>
                   <div
                     style={{
                       width: '100%',
-                      height: '6px',
+                      height: '4px',
                       backgroundColor: 'var(--color-subtle-bg)',
-                      borderRadius: '3px',
+                      borderRadius: '2px',
                       overflow: 'hidden',
                     }}
                   >
@@ -149,11 +158,11 @@ export default function BusinessScreen() {
                       style={{
                         height: '100%',
                         backgroundColor: 'var(--color-accent)',
-                        borderRadius: '3px',
+                        borderRadius: '2px',
                       }}
                     />
                   </div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '8px 0 0' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '10px 0 0', fontWeight: 300 }}>
                     {nextTier.threshold - enrollment.visits} more visits to {nextTier.name}
                   </p>
                 </div>
@@ -162,21 +171,21 @@ export default function BusinessScreen() {
           </div>
         )}
 
-        {/* Recognition Timeline */}
-        <div style={{ padding: '28px 20px 0' }}>
-          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 20px' }}>
+        {/* Recognition Timeline — sophisticated */}
+        <div style={{ padding: '32px 20px 0' }}>
+          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 24px' }}>
             Recognition Journey
           </h3>
 
           <div style={{ position: 'relative', paddingLeft: '28px' }}>
-            {/* Vertical line */}
+            {/* Vertical line — thinner */}
             <div
               style={{
                 position: 'absolute',
                 left: '7px',
                 top: '6px',
                 bottom: '6px',
-                width: '2px',
+                width: '1px',
                 backgroundColor: 'var(--color-divider)',
               }}
             />
@@ -192,25 +201,25 @@ export default function BusinessScreen() {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   style={{
                     position: 'relative',
-                    marginBottom: index < business.tiers.length - 1 ? '24px' : 0,
-                    padding: isCurrent ? '16px' : '0',
-                    backgroundColor: isCurrent ? 'var(--color-subtle-bg)' : 'transparent',
-                    borderRadius: isCurrent ? '12px' : 0,
+                    marginBottom: index < business.tiers.length - 1 ? '28px' : 0,
+                    padding: isCurrent ? '18px' : '0',
+                    backgroundColor: isCurrent ? 'rgba(243,237,229,0.6)' : 'transparent',
+                    borderRadius: isCurrent ? '14px' : 0,
                     marginLeft: isCurrent ? '-8px' : 0,
-                    paddingLeft: isCurrent ? '20px' : 0,
+                    paddingLeft: isCurrent ? '22px' : 0,
                   }}
                 >
-                  {/* Dot */}
+                  {/* Dot — thin ring for unreached, filled for reached */}
                   <div
                     style={{
                       position: 'absolute',
                       left: isCurrent ? '-20px' : '-28px',
-                      top: isCurrent ? '20px' : '4px',
-                      width: '16px',
-                      height: '16px',
+                      top: isCurrent ? '22px' : '4px',
+                      width: '14px',
+                      height: '14px',
                       borderRadius: '50%',
                       backgroundColor: isReached ? 'var(--color-accent)' : 'transparent',
-                      border: isReached ? '3px solid var(--color-accent)' : '2px solid var(--color-divider)',
+                      border: isReached ? 'none' : '1.5px solid var(--color-divider)',
                       zIndex: 1,
                     }}
                   />
@@ -219,10 +228,10 @@ export default function BusinessScreen() {
                     <h4
                       style={{
                         fontFamily: 'var(--font-heading)',
-                        fontSize: isCurrent ? '18px' : '16px',
-                        fontWeight: isReached ? 600 : 400,
+                        fontSize: isCurrent ? '19px' : '17px',
+                        fontWeight: isReached ? 500 : 400,
                         color: isReached ? 'var(--color-text)' : 'var(--color-muted)',
-                        margin: '0 0 4px',
+                        margin: '0 0 6px',
                       }}
                     >
                       {tier.name}
@@ -230,8 +239,9 @@ export default function BusinessScreen() {
                     <span
                       style={{
                         fontFamily: 'var(--font-body)',
-                        fontSize: '12px',
+                        fontSize: '11px',
                         color: 'var(--color-muted)',
+                        fontWeight: 300,
                       }}
                     >
                       {tier.threshold === 0 ? 'Start' : `${tier.threshold} visits`}
@@ -246,10 +256,11 @@ export default function BusinessScreen() {
                           fontFamily: 'var(--font-body)',
                           fontSize: '11px',
                           color: isReached ? 'var(--color-text)' : 'var(--color-muted)',
-                          backgroundColor: isReached ? 'rgba(196,113,59,0.08)' : 'var(--color-subtle-bg)',
+                          backgroundColor: isReached ? 'rgba(196,113,59,0.06)' : 'rgba(243,237,229,0.6)',
                           padding: '4px 10px',
                           borderRadius: '20px',
-                          opacity: isReached ? 1 : 0.7,
+                          opacity: isReached ? 1 : 0.6,
+                          fontWeight: 400,
                         }}
                       >
                         {perk}
@@ -262,27 +273,27 @@ export default function BusinessScreen() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ margin: '28px 20px 0', height: '1px', backgroundColor: 'var(--color-divider)' }} />
+        {/* Divider — thinner */}
+        <div style={{ margin: '32px 20px 0', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)' }} />
 
-        {/* Business Info */}
-        <div style={{ padding: '24px 20px 0' }}>
-          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 16px' }}>
+        {/* Business Info — more breathing room */}
+        <div style={{ padding: '28px 20px 0' }}>
+          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>
             About
           </h3>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)', lineHeight: 1.7, margin: '0 0 20px' }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)', lineHeight: 1.75, margin: '0 0 24px', fontWeight: 300 }}>
             {business.description}
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {[
               { icon: MapPin, text: business.address },
               { icon: Clock, text: business.hours },
               { icon: Phone, text: business.phone },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Icon size={16} color="var(--color-muted)" strokeWidth={1.5} />
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text)' }}>
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <Icon size={15} color="var(--color-muted)" strokeWidth={1.5} />
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text)', fontWeight: 300 }}>
                   {text}
                 </span>
               </div>
@@ -291,12 +302,12 @@ export default function BusinessScreen() {
         </div>
 
         {/* Divider */}
-        <div style={{ margin: '28px 20px 0', height: '1px', backgroundColor: 'var(--color-divider)' }} />
+        <div style={{ margin: '32px 20px 0', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)' }} />
 
-        {/* Merch Section */}
+        {/* Merch Section — polished cards */}
         {businessMerch.length > 0 && (
-          <div style={{ padding: '24px 0 0' }}>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 16px', paddingLeft: '20px' }}>
+          <div style={{ padding: '28px 0 0' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px', paddingLeft: '20px' }}>
               Available to You
             </h3>
             <div
@@ -319,18 +330,19 @@ export default function BusinessScreen() {
                   onClick={() => navigate(`/redeem/${id}/${item.id}`)}
                   style={{
                     flexShrink: 0,
-                    width: '150px',
+                    width: '155px',
                     cursor: 'pointer',
                   }}
                 >
                   <div
                     style={{
-                      width: '150px',
-                      height: '150px',
-                      borderRadius: '14px',
+                      width: '155px',
+                      height: '155px',
+                      borderRadius: '16px',
                       overflow: 'hidden',
                       marginBottom: '10px',
                       backgroundColor: 'var(--color-subtle-bg)',
+                      boxShadow: '0 2px 12px rgba(44,24,16,0.06)',
                     }}
                   >
                     <img
@@ -342,7 +354,7 @@ export default function BusinessScreen() {
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 4px', lineHeight: 1.3 }}>
                     {item.name}
                   </p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-accent)', margin: 0, fontWeight: 500 }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-accent)', margin: 0, fontWeight: 400 }}>
                     {item.pointCost} pts
                   </p>
                 </motion.div>
@@ -352,12 +364,12 @@ export default function BusinessScreen() {
         )}
 
         {/* Divider */}
-        <div style={{ margin: '28px 20px 0', height: '1px', backgroundColor: 'var(--color-divider)' }} />
+        <div style={{ margin: '32px 20px 0', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)' }} />
 
-        {/* Events Section */}
+        {/* Events Section — cleaner card design */}
         {businessExperiences.length > 0 && (
-          <div style={{ padding: '24px 20px 0' }}>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 16px' }}>
+          <div style={{ padding: '28px 20px 0' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>
               Upcoming at {business.name}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -375,9 +387,9 @@ export default function BusinessScreen() {
                       display: 'flex',
                       gap: '14px',
                       backgroundColor: 'var(--color-surface)',
-                      borderRadius: '14px',
+                      borderRadius: '16px',
                       overflow: 'hidden',
-                      boxShadow: 'var(--shadow-card)',
+                      boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
                       cursor: 'pointer',
                     }}
                   >
@@ -386,14 +398,14 @@ export default function BusinessScreen() {
                       alt={exp.name}
                       style={{ width: '100px', height: '100px', objectFit: 'cover', flexShrink: 0 }}
                     />
-                    <div style={{ padding: '12px 14px 12px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-                      <p style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 600, color: 'var(--color-text)', margin: '0 0 4px', lineHeight: 1.25 }}>
+                    <div style={{ padding: '14px 14px 14px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
+                      <p style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 500, color: 'var(--color-text)', margin: '0 0 4px', lineHeight: 1.25 }}>
                         {exp.name}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '0 0 4px' }}>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '0 0 4px', fontWeight: 300 }}>
                         {formattedDate} at {exp.time}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-accent)', margin: 0 }}>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-accent)', margin: 0, fontWeight: 400 }}>
                         {exp.spotsRemaining} spots left
                       </p>
                     </div>
@@ -405,10 +417,10 @@ export default function BusinessScreen() {
         )}
 
         {/* Divider */}
-        <div style={{ margin: '28px 20px 0', height: '1px', backgroundColor: 'var(--color-divider)' }} />
+        <div style={{ margin: '32px 20px 0', height: '0.5px', backgroundColor: 'rgba(44,24,16,0.08)' }} />
 
-        {/* Community Preview */}
-        <div style={{ padding: '24px 20px 0' }}>
+        {/* Community Preview — refined */}
+        <div style={{ padding: '28px 20px 0' }}>
           <button
             onClick={() => navigate('/community')}
             style={{
@@ -416,26 +428,26 @@ export default function BusinessScreen() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '18px 20px',
+              padding: '20px',
               backgroundColor: 'var(--color-surface)',
-              borderRadius: '14px',
+              borderRadius: '16px',
               border: 'none',
-              boxShadow: 'var(--shadow-card)',
+              boxShadow: '0 1px 8px rgba(44,24,16,0.04)',
               cursor: 'pointer',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <MessageCircle size={20} color="var(--color-accent)" strokeWidth={1.5} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <MessageCircle size={18} color="var(--color-accent)" strokeWidth={1.5} />
               <div style={{ textAlign: 'left' }}>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: 'var(--color-text)', margin: 0 }}>
                   Join the conversation
                 </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '2px 0 0' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-muted)', margin: '3px 0 0', fontWeight: 300 }}>
                   See what others are saying
                 </p>
               </div>
             </div>
-            <ChevronRight size={18} color="var(--color-muted)" strokeWidth={1.5} />
+            <ChevronRight size={16} color="var(--color-muted)" strokeWidth={1.5} />
           </button>
         </div>
       </div>
