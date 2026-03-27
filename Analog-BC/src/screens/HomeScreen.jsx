@@ -13,14 +13,26 @@ export default function HomeScreen() {
     (b) => currentUser.enrollments[b.id]?.enrolled
   );
 
-  // First business is the hero; rest go to horizontal scroll
+  // First business is the hero; rest go to masonry grid
   const [heroBusiness, ...otherBusinesses] = enrolledBusinesses;
+
+  // Masonry layout pattern: alternate tall/wide cards for true asymmetry
+  // Pattern repeats: [tall-left, short-right, short-right, wide-full, short-left, tall-right]
+  const getMasonryStyle = (index) => {
+    const patterns = [
+      { gridColumn: '1 / 2', height: '280px' },    // tall left
+      { gridColumn: '2 / 3', height: '130px' },     // short right top
+      { gridColumn: '2 / 3', height: '130px' },     // short right bottom
+      { gridColumn: '1 / 3', height: '200px' },     // wide full
+    ];
+    return patterns[index % patterns.length];
+  };
 
   return (
     <PageTransition>
       <div style={{ minHeight: '100dvh', backgroundColor: 'var(--color-bg)', paddingBottom: '80px' }}>
 
-        {/* Top bar — refined */}
+        {/* Top bar */}
         <div
           style={{
             position: 'absolute',
@@ -68,7 +80,7 @@ export default function HomeScreen() {
           </button>
         </div>
 
-        {/* Primary Hero — 85vh full-bleed, no border-radius */}
+        {/* Primary Hero — 85vh full-bleed */}
         {heroBusiness && (() => {
           const heroEnrollment = currentUser.enrollments[heroBusiness.id];
           return (
@@ -83,7 +95,6 @@ export default function HomeScreen() {
                 flexShrink: 0,
               }}
             >
-              {/* Hero image — full-bleed, no border-radius */}
               <div className="grain" style={{ position: 'absolute', inset: 0 }}>
                 <img
                   src={heroBusiness.heroImage}
@@ -98,7 +109,6 @@ export default function HomeScreen() {
                 />
               </div>
 
-              {/* Bottom gradient fading to --color-bg */}
               <div
                 style={{
                   position: 'absolute',
@@ -112,7 +122,6 @@ export default function HomeScreen() {
                 }}
               />
 
-              {/* Dark overlay for text legibility */}
               <div
                 style={{
                   position: 'absolute',
@@ -127,7 +136,6 @@ export default function HomeScreen() {
                 }}
               />
 
-              {/* Hero content overlay */}
               <div
                 style={{
                   position: 'absolute',
@@ -137,7 +145,6 @@ export default function HomeScreen() {
                   padding: '32px 24px 28px',
                 }}
               >
-                {/* Category label */}
                 <p
                   style={{
                     fontFamily: 'var(--font-body)',
@@ -152,7 +159,6 @@ export default function HomeScreen() {
                   {heroBusiness.category}
                 </p>
 
-                {/* Venue name — 48px Cormorant, white */}
                 <h2
                   style={{
                     fontFamily: 'var(--font-heading)',
@@ -167,7 +173,6 @@ export default function HomeScreen() {
                   {heroBusiness.name}
                 </h2>
 
-                {/* Stats row — 12px, overlaid on image below name */}
                 <div
                   style={{
                     display: 'flex',
@@ -213,10 +218,9 @@ export default function HomeScreen() {
           );
         })()}
 
-        {/* "Your Places" section — below hero */}
+        {/* Your Places — Masonry Grid */}
         {otherBusinesses.length > 0 && (
-          <div style={{ paddingTop: '40px' }}>
-            {/* Section title */}
+          <div style={{ padding: '40px 16px 0' }}>
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -228,143 +232,147 @@ export default function HomeScreen() {
                 fontWeight: 500,
                 color: 'var(--color-text)',
                 margin: '0 0 20px',
-                paddingLeft: '20px',
+                paddingLeft: '4px',
                 letterSpacing: '0.3px',
               }}
             >
               Your Places
             </motion.h2>
 
-            {/* Horizontal scroll — 260px wide, 180px tall cards, 8px border-radius */}
+            {/* Two-column masonry grid */}
             <div
               style={{
-                display: 'flex',
-                gap: '16px',
-                overflowX: 'auto',
-                paddingLeft: '20px',
-                paddingRight: '20px',
-                paddingBottom: '4px',
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '12px',
               }}
             >
               {otherBusinesses.map((business, index) => {
                 const enrollment = currentUser.enrollments[business.id];
+                const style = getMasonryStyle(index);
+                const isWide = style.gridColumn === '1 / 3';
+                const isTall = style.height === '280px';
+
                 return (
                   <motion.div
                     key={business.id}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.07 }}
+                    transition={{ duration: 0.4, delay: index * 0.06 }}
                     viewport={{ once: true }}
                     onClick={() => navigate(`/business/${business.id}`)}
                     style={{
-                      flexShrink: 0,
-                      width: '260px',
-                      cursor: 'pointer',
-                      backgroundColor: 'var(--color-surface)',
-                      borderRadius: '12px',
+                      gridColumn: style.gridColumn,
+                      height: style.height,
+                      position: 'relative',
                       overflow: 'hidden',
-                      border: '0.5px solid rgba(44,24,16,0.06)',
-                      boxShadow: 'var(--shadow-card)',
+                      borderRadius: '10px',
+                      cursor: 'pointer',
                     }}
                   >
-                    {/* Card image — 180px tall, 8px border-radius (top only) */}
+                    {/* Image */}
+                    <img
+                      src={business.heroImage}
+                      alt={business.name}
+                      className="img-mood"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
+                    />
+
+                    {/* Gradient overlay */}
                     <div
                       style={{
-                        position: 'relative',
-                        height: '180px',
-                        overflow: 'hidden',
+                        position: 'absolute',
+                        inset: 0,
+                        background: `linear-gradient(
+                          to top,
+                          rgba(20,12,8,0.85) 0%,
+                          rgba(20,12,8,0.3) 50%,
+                          transparent 100%
+                        )`,
+                        pointerEvents: 'none',
+                      }}
+                    />
+
+                    {/* Content overlay */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: isWide ? '16px 18px' : isTall ? '16px 14px' : '10px 12px',
                       }}
                     >
-                      <img
-                        src={business.heroImage}
-                        alt={business.name}
-                        className="img-mood"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
-                        }}
-                      />
-                      {/* Subtle bottom gradient */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          height: '60px',
-                          background: 'linear-gradient(to top, rgba(36,20,12,0.4) 0%, transparent 100%)',
-                        }}
-                      />
-                      {/* Category label on image */}
-                      <p
-                        style={{
-                          position: 'absolute',
-                          bottom: '10px',
-                          left: '12px',
-                          fontFamily: 'var(--font-body)',
-                          fontSize: '10px',
-                          color: 'rgba(250,248,245,0.7)',
-                          margin: 0,
-                          letterSpacing: '1.5px',
-                          textTransform: 'uppercase',
-                          fontWeight: 400,
-                        }}
-                      >
-                        {business.category}
-                      </p>
-                    </div>
+                      {/* Category — only show on tall and wide cards */}
+                      {(isTall || isWide) && (
+                        <p
+                          style={{
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '9px',
+                            color: 'rgba(250,248,245,0.5)',
+                            margin: '0 0 4px',
+                            letterSpacing: '1.5px',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          {business.category}
+                        </p>
+                      )}
 
-                    {/* Card content */}
-                    <div style={{ padding: '14px 16px 16px' }}>
                       <h3
                         style={{
                           fontFamily: 'var(--font-heading)',
-                          fontSize: '18px',
+                          fontSize: isWide ? '24px' : isTall ? '20px' : '16px',
                           fontWeight: 500,
-                          color: 'var(--color-text)',
-                          margin: '0 0 6px',
-                          lineHeight: 1.15,
+                          color: '#FAF8F5',
+                          margin: 0,
+                          lineHeight: 1.1,
+                          letterSpacing: '0.3px',
                         }}
                       >
                         {business.name}
                       </h3>
-                      <div style={{ display: 'flex', gap: '16px' }}>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-body)',
-                            fontSize: '12px',
-                            color: 'var(--color-muted)',
-                            fontWeight: 300,
-                          }}
-                        >
-                          {enrollment?.visits} visits
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-body)',
-                            fontSize: '12px',
-                            color: 'var(--color-muted)',
-                            fontWeight: 300,
-                          }}
-                        >
-                          {enrollment?.points} pts
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-heading)',
-                            fontSize: '12px',
-                            color: 'var(--color-accent)',
-                            fontStyle: 'italic',
-                            fontWeight: 400,
-                          }}
-                        >
-                          {enrollment?.currentTier}
-                        </span>
-                      </div>
+
+                      {/* Stats — show on tall and wide cards */}
+                      {(isTall || isWide) && (
+                        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-body)',
+                              fontSize: '11px',
+                              color: 'rgba(250,248,245,0.6)',
+                              fontWeight: 400,
+                            }}
+                          >
+                            {enrollment?.visits} visits
+                          </span>
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-body)',
+                              fontSize: '11px',
+                              color: 'rgba(250,248,245,0.6)',
+                              fontWeight: 400,
+                            }}
+                          >
+                            {enrollment?.points} pts
+                          </span>
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-heading)',
+                              fontSize: '11px',
+                              color: 'rgba(250,248,245,0.7)',
+                              fontStyle: 'italic',
+                            }}
+                          >
+                            {enrollment?.currentTier}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 );
@@ -373,7 +381,7 @@ export default function HomeScreen() {
           </div>
         )}
 
-        {/* If no enrolled businesses at all */}
+        {/* Empty state */}
         {enrolledBusinesses.length === 0 && (
           <div
             style={{

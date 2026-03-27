@@ -30,10 +30,20 @@ const user = {
       nextUnlock: "Daily Grind at 5 visits",
     },
     "hearth-honey": {
-      enrolled: false,
+      enrolled: true,
+      currentTier: "Breadwinner",
+      tierIndex: 1,
+      visits: 12,
+      points: 780,
+      nextUnlock: "Inner Crust at 15 visits",
     },
     "terroir": {
-      enrolled: false,
+      enrolled: true,
+      currentTier: "Regular",
+      tierIndex: 1,
+      visits: 6,
+      points: 420,
+      nextUnlock: "Sommelier's Circle at 15 visits",
     },
   },
 };
